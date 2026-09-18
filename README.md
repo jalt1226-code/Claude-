@@ -14,6 +14,7 @@ A night is three games, best of three, picked from:
 3. **Plot Twist** — same buzzers, but the movie is described in plain words.
 4. **Which Came First?** — two films side by side; buzz in and pick the older one. The app
    knows the answer, so nobody argues.
+5. **Quote Unquote** — a real line from the film on screen. Buzz in and name it.
 
 There is also a "Just charades" mode for a single timed round.
 
@@ -23,6 +24,8 @@ There is also a "Just charades" mode for a single timed round.
   170 of the 341 films are from those twenty years.
 - **Rewind Mode** — four extra clue types on top of charades: narrate the trailer, sell it
   like a video-store clerk, read the back of the box, or post it as a 2003 away message.
+- **Quote it** — films with a famous line get a card that prints it, to be read out as the
+  clue. 399 lines across 244 of the films.
 - **Late fees** — the drinking mode. Losing a game costs a shot, and anyone can be charged
   another at any point between rounds. The night ends on a rental receipt that totals them up.
 - VHS tracking glitch between screens, tape-deck sound effects and a dial-up handshake when
@@ -33,10 +36,13 @@ descriptions, face-off prompts and wildcards. Sound effects are synthesised with
 Audio API, so no audio files are bundled. Settings and player names are remembered in
 `localStorage`.
 
-### A note on the clue text
+### Director's Cut
 
-Clues point at a film by describing it. Song and poem titles are named, because a title is
-the most useful part of a music hint, but lyrics are never quoted — the hint describes how
-the music goes instead. Dialogue appears only as short, famous catchphrases; longer lines
-are paraphrased into a description of the same moment. The aim is a clue that is just as
-recognisable without reproducing anyone's work.
+Real film dialogue runs all through the deck — several hundred lines — because that is what
+makes the clues work. A setting decides how the wordiest cards read:
+
+- **On** (the default): the long speeches and the song lines are printed word for word.
+- **Off**: those same moments are described instead. Everything else is unchanged.
+
+The switch covers 31 cards: 11 song lyrics and 20 runs of dialogue long enough to be worth
+paraphrasing. Short famous lines are in the deck either way.
