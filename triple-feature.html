@@ -148,6 +148,7 @@ button:disabled{opacity:.35;cursor:not-allowed}
 .stamp{display:inline-block;font-family:var(--display);font-size:1.05rem;letter-spacing:.06em;padding:6px 12px;border-radius:5px;
   background:var(--sticker);color:#fff;transform:rotate(-2deg);margin:0 6px 14px 0;box-shadow:0 3px 0 rgba(0,0,0,.25)}
 .stamp.q{background:var(--neon)}.stamp.w{background:var(--purple)}.stamp.h{background:var(--teal);color:#00313A}
+.stamp.t{background:var(--orange);color:#2B1D00}.stamp.b{background:#1544B8;color:#fff}
 .stamp.x{background:#170B33;color:var(--stub);transform:rotate(2deg)}
 .special{margin:14px 0 0;padding:12px;border-radius:6px;font-weight:700;font-size:.98rem;color:#fff;background:var(--purple);box-shadow:0 3px 0 rgba(0,0,0,.2)}
 .special.dare{background:var(--sticker)}.special.dbl{background:var(--stub);color:#2B1D00}
@@ -159,6 +160,63 @@ button:disabled{opacity:.35;cursor:not-allowed}
 .pips{display:flex;justify-content:center;gap:6px;margin-top:10px}
 .pips i{width:12px;height:12px;border-radius:50%;background:#3E2178;box-shadow:inset 0 1px 3px rgba(0,0,0,.6)}
 .pips i.on{background:var(--lime);box-shadow:0 0 12px rgba(182,255,60,.7)}
+
+/* ---------- tracking glitch on every screen change ---------- */
+#app.glitch{animation:tear .3s steps(3) 1}
+#app.glitch:before{content:"";position:fixed;inset:0;z-index:7;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 2px,transparent 2px 5px);
+  animation:band .3s linear 1}
+@keyframes tear{
+  0%{transform:translateX(0);filter:none}
+  33%{transform:translateX(-7px);filter:drop-shadow(3px 0 0 rgba(255,46,99,.75)) drop-shadow(-3px 0 0 rgba(0,229,255,.75))}
+  66%{transform:translateX(5px);filter:drop-shadow(-2px 0 0 rgba(255,79,216,.6))}
+  100%{transform:translateX(0);filter:none}
+}
+@keyframes band{from{opacity:.85;transform:translateY(-14%)}to{opacity:0;transform:translateY(14%)}}
+
+/* ---------- which came first: the two contenders ---------- */
+.versus{display:flex;align-items:stretch;gap:10px;margin:6px 0}
+.versus .vs{flex:1;min-width:0;background:linear-gradient(150deg,#1D0B47,#30125C);color:var(--label);
+  border-radius:8px;padding:16px 12px;text-align:center;border-bottom:5px solid #3E2178;
+  display:flex;flex-direction:column;justify-content:center;gap:8px}
+.versus .vs .t{font-family:var(--display);font-size:clamp(17px,4.6vw,24px);line-height:1.08}
+.versus .vs .y{font-family:var(--display);font-size:1.5rem;color:var(--dim);letter-spacing:.06em}
+.versus .vs.older{border-bottom-color:var(--lime);box-shadow:0 0 26px rgba(182,255,60,.3)}
+.versus .vs.older .y{color:var(--lime)}
+.versus .or{align-self:center;font-family:var(--display);font-size:1.2rem;color:var(--sticker);flex:none}
+
+/* ---------- late fees ---------- */
+.fees{background:#1C0A45;border-radius:8px;padding:12px 14px;margin-top:12px;border-left:5px solid var(--sticker)}
+.fees .lbl{margin:0 0 8px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);font-weight:700}
+.feerow{display:flex;gap:10px}
+.fee{flex:1;min-width:0;background:#2B1060;border-radius:6px;padding:8px 10px 9px}
+.fee .who{display:block;font-size:.78rem;font-weight:600;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;color:var(--dim);margin-bottom:6px}
+.fee .ctl{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.fee b{font-family:var(--display);font-size:1.4rem;color:var(--stub);min-width:1.1em;text-align:center}
+.fee button{width:40px;height:38px;flex:none;border-radius:6px;background:#4B2A8A;color:var(--label);
+  font-size:1.3rem;line-height:1;font-weight:700}
+.fee button:disabled{opacity:.3}
+
+/* ---------- membership card & rental receipt ---------- */
+.memcard{margin-top:18px;border-radius:10px;padding:16px 18px 14px;
+  background:linear-gradient(135deg,#1544B8,#0B2A7A);box-shadow:0 8px 0 rgba(0,0,0,.45);position:relative;overflow:hidden}
+.memcard .strip{position:absolute;left:0;right:0;top:0;height:14px;
+  background:repeating-linear-gradient(90deg,var(--stub) 0 18px,#E5A500 18px 36px)}
+.memcard .co{margin:12px 0 0;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:#A8C4FF;font-weight:700}
+.memcard .nm{margin:4px 0 0;font-family:var(--display);font-size:clamp(22px,6vw,38px);color:#fff;line-height:1.05;
+  overflow-wrap:anywhere}
+.memcard .no{margin:8px 0 0;font-size:.68rem;letter-spacing:.14em;color:#C6D8FF;font-family:ui-monospace,Menlo,Consolas,monospace}
+.receipt{margin-top:12px;background:#F6F1E3;color:#2A2118;border-radius:4px;padding:18px 18px 22px;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;
+  box-shadow:0 8px 0 rgba(0,0,0,.4)}
+.receipt .hd{margin:0;text-align:center;font-weight:700;letter-spacing:.2em}
+.receipt .hd.sm{font-size:.68rem;letter-spacing:.1em;font-weight:400;color:#6B6052;margin-top:3px}
+.receipt .ln{border-top:1px dashed #B5A995;margin:10px 0}
+.receipt .li{display:flex;justify-content:space-between;gap:12px;margin:4px 0}
+.receipt .li span:last-child{text-align:right;font-weight:700}
+.receipt .li.tot{font-size:.95rem;letter-spacing:.04em}
+.receipt .ft{margin:10px 0 0;text-align:center;font-size:.72rem;color:#6B6052;line-height:1.6}
 
 /* ---------- hints ---------- */
 .hints{margin:14px 0 0;padding:14px;background:#EFE6D2;border-radius:6px;border-left:5px solid var(--purple)}
@@ -190,8 +248,10 @@ button:disabled{opacity:.35;cursor:not-allowed}
 .lights{position:relative;padding:28px 14px;border-radius:14px;background:linear-gradient(160deg,#3B1078,#12062F);text-align:center;
   box-shadow:0 0 0 5px var(--tape),0 0 0 12px var(--stub),0 18px 50px rgba(255,79,216,.4);overflow:hidden}
 .lights:before{padding:11px;background:radial-gradient(circle,var(--stub) 3px,transparent 4px) 0 0/22px 22px}
-.lights .who{font-family:var(--display);font-size:clamp(50px,18vw,92px);line-height:.9;color:var(--stub);
-  text-shadow:3px 3px 0 var(--sticker),0 0 40px rgba(255,210,63,.6)}
+/* Team names can be long ("Ada & Bo" vs a 12-character name) — wrap rather than clip. */
+.lights .who{font-family:var(--display);font-size:clamp(38px,14vw,92px);line-height:.92;color:var(--stub);
+  text-shadow:3px 3px 0 var(--sticker),0 0 40px rgba(255,210,63,.6);
+  overflow-wrap:anywhere;word-break:break-word;padding:0 4px}
 .lights .w{font-family:var(--display);font-size:clamp(26px,9vw,44px);color:var(--teal);letter-spacing:.08em}
 .lights .rec{color:#E9DFFF;font-size:.9rem;margin-top:12px;position:relative}
 .confetti{position:fixed;top:-20px;width:11px;height:17px;z-index:8;pointer-events:none;animation:fall linear forwards;border-radius:2px}
@@ -336,12 +396,6 @@ const MOVIES=[
 ...M_("F",0,["The Matrix","The Terminator","Harry Potter","The Lord of the Rings","Edward Scissorhands","Men in Black"])
 ];
 
-const CLUES=[
- {k:"Act it out",c:"",r:"No talking, no sounds, no pointing at objects in the room."},
- {k:"Play a scene",c:"q",r:"Talk your way through one of these moments. Haven't seen it? Make the lines up — play the character, not the script. Never say a word from the title."},
- {k:"One word",c:"w",r:"One single word, then silence. Say it in the character's accent or voice if that helps."},
- {k:"Hum it",c:"h",r:"Hum or sing the music. No words at all."}
-];
 
 // Mystery cards — land on about one card in four.
 const SPECIALS=[
@@ -936,6 +990,350 @@ const SONG={
 "Despicable Me":"Happy Pharrell Williams","Minions":"Banana Song Minions","Madagascar":"I Like to Move It Madagascar"
 };
 
+/* ============ THE MILLENNIAL SHELF ============ */
+// Release year for every title already in the deck. Applied as a map rather than
+// edited into 255 entries by hand.
+const YEARS={
+// animated
+"The Lion King":1994,"Frozen":2013,"Toy Story":1995,"Finding Nemo":2003,"Shrek":2001,"Moana":2016,
+"Encanto":2021,"Coco":2017,"Up":2009,"Monsters, Inc.":2001,"Inside Out":2015,"Ratatouille":2007,
+"WALL-E":2008,"Cars":2006,"The Incredibles":2004,"Despicable Me":2010,"Minions":2015,"Kung Fu Panda":2008,
+"Madagascar":2005,"Ice Age":2002,"How to Train Your Dragon":2010,"Lilo & Stitch":2002,"Aladdin":1992,
+"Beauty and the Beast":1991,"Cinderella":1950,"The Little Mermaid":1989,"Mulan":1998,"Tangled":2010,
+"Sleeping Beauty":1959,"Snow White and the Seven Dwarfs":1937,"Peter Pan":1953,"Bambi":1942,"Dumbo":1941,
+"101 Dalmatians":1961,"The Jungle Book":1967,"Pinocchio":1940,"Zootopia":2016,"Big Hero 6":2014,"Brave":2012,
+"Tarzan":1999,"Hercules":1997,"Pocahontas":1995,"The Emperor's New Groove":2000,"Lady and the Tramp":1955,
+"Finding Dory":2016,"Luca":2021,"Turning Red":2022,"Soul":2020,"Wreck-It Ralph":2012,"Toy Story 3":2010,
+"Shrek 2":2004,"Shrek the Third":2007,"The Polar Express":2004,"Sing":2016,"Trolls":2016,
+"The Secret Life of Pets":2016,"Hotel Transylvania":2012,"Happy Feet":2006,"Chicken Run":2000,
+"The Iron Giant":1999,"The Nightmare Before Christmas":1993,"The Lego Movie":2014,
+"Cloudy with a Chance of Meatballs":2009,
+// musicals
+"Mary Poppins":1964,"The Sound of Music":1965,"The Wizard of Oz":1939,"High School Musical":2006,
+"The Greatest Showman":2017,"Willy Wonka & the Chocolate Factory":1971,"Grease":1978,"Hairspray":2007,
+"Moulin Rouge!":2001,"La La Land":2016,"Mamma Mia!":2008,"Pitch Perfect":2012,"School of Rock":2003,
+"Sister Act":1992,"Dirty Dancing":1987,"Footloose":1984,"Saturday Night Fever":1977,"The Blues Brothers":1980,
+"Bohemian Rhapsody":2018,"A Star Is Born":2018,"Walk the Line":2005,
+// comedy
+"Home Alone":1990,"Home Alone 2":1992,"Elf":2003,"Matilda":1996,"The Parent Trap":1998,"Freaky Friday":2003,
+"Spy Kids":2001,"Night at the Museum":2006,"Jumanji":1995,"The Sandlot":1993,"Space Jam":1996,
+"Mrs. Doubtfire":1993,"Paddington":2014,"A Christmas Story":1983,"Christmas Vacation":1989,"Ghostbusters":1984,
+"Groundhog Day":1993,"Big":1988,"Ferris Bueller's Day Off":1986,"The Breakfast Club":1985,"Airplane!":1980,
+"Caddyshack":1980,"Clueless":1995,"Legally Blonde":2001,"The Devil Wears Prada":2006,"Mean Girls":2004,
+"Napoleon Dynamite":2004,"Anchorman":2004,"Dodgeball":2004,"Zoolander":2001,"Step Brothers":2008,
+"Talladega Nights":2006,"Wedding Crashers":2005,"The Hangover":2009,"Rush Hour":1998,"Bad Boys":1995,
+"Beverly Hills Cop":1984,"Coming to America":1988,"Liar Liar":1997,"The Mask":1994,
+"Ace Ventura: Pet Detective":1994,"Dumb and Dumber":1994,"Happy Gilmore":1996,"Billy Madison":1995,
+"The Waterboy":1998,"Tommy Boy":1995,"Austin Powers":1997,"Beetlejuice":1988,"Superbad":2007,
+"The 40-Year-Old Virgin":2005,"Bridesmaids":2011,"Tropic Thunder":2008,"Old School":2003,"White Chicks":2004,
+"Meet the Parents":2000,"21 Jump Street":2012,"Nacho Libre":2006,"Shaun of the Dead":2004,"Easy A":2010,
+"Scary Movie":2000,"Zombieland":2009,"We're the Millers":2013,"The Proposal":2009,"Grown Ups":2010,
+"Crazy Rich Asians":2018,
+// action
+"The Karate Kid":1984,"The Goonies":1985,"Jurassic Park":1993,"Jaws":1975,"Jaws 2":1978,
+"Raiders of the Lost Ark":1981,"Rocky":1976,"Rocky IV":1985,"Top Gun":1986,"Die Hard":1988,
+"Independence Day":1996,"Twister":1996,"Speed":1994,"The Mummy":1999,"Pirates of the Caribbean":2003,
+"The Hunger Games":2012,"Spider-Man":2002,"The Dark Knight":2008,"Iron Man":2008,"The Avengers":2012,
+"Black Panther":2018,"Wonder Woman":2017,"Guardians of the Galaxy":2014,"Deadpool":2016,
+"Mission: Impossible":1996,"Goldfinger":1964,"The Fast and the Furious":2001,"Gladiator":2000,
+"Braveheart":1995,"Predator":1987,"300":2006,"The Bourne Identity":2002,"Casino Royale":2006,"Skyfall":2012,
+"Taken":2008,"Kill Bill":2003,"Mad Max: Fury Road":2015,"Transformers":2007,"X-Men":2000,
+"Jurassic World":2015,"John Wick":2014,"Django Unchained":2012,"Inglourious Basterds":2009,
+// romance & drama
+"Babe":1995,"Charlotte's Web":1973,"Free Willy":1993,"Stuart Little":1999,"Remember the Titans":2000,
+"Titanic":1997,"Forrest Gump":1994,"Ghost":1990,"Pretty Woman":1990,"When Harry Met Sally":1989,
+"Jerry Maguire":1996,"Cast Away":2000,"The Notebook":2004,"Twilight":2008,"The Godfather":1972,
+"Pulp Fiction":1994,"Goodfellas":1990,"Casablanca":1942,"Rain Man":1988,"Field of Dreams":1989,
+"The Blind Side":2009,"The Truman Show":1998,"The Departed":2006,"The Wolf of Wall Street":2013,
+"The Pursuit of Happyness":2006,"Slumdog Millionaire":2008,"The Social Network":2010,"The Help":2011,
+"500 Days of Summer":2009,"The Fault in Our Stars":2014,"A Walk to Remember":2002,
+// scary
+"Psycho":1960,"The Shining":1980,"Halloween":1978,"Scream":1996,"The Exorcist":1973,"It":2017,
+"A Quiet Place":2018,"Get Out":2017,"The Sixth Sense":1999,"The Silence of the Lambs":1991,"Alien":1979,
+"Fight Club":1999,"Shutter Island":2010,"Saw":2004,"The Conjuring":2013,"The Ring":2002,
+"Paranormal Activity":2007,"I Am Legend":2007,
+// sci-fi & fantasy
+"E.T. the Extra-Terrestrial":1982,"The Princess Bride":1987,"Back to the Future":1985,"Star Wars":1977,
+"The Matrix":1999,"The Terminator":1984,"Harry Potter":2001,"The Lord of the Rings":2001,
+"Edward Scissorhands":1990,"Men in Black":1997,"Inception":2010,"Avatar":2009,"The Martian":2015,
+"Interstellar":2014
+};
+
+// ---- the millennial shelf: the rental-store canon the deck was missing ----
+MOVIES.push(
+// animation
+{t:"The Land Before Time",g:"A",f:1,y:1988},{t:"An American Tail",g:"A",f:1,y:1986},
+{t:"The Secret of NIMH",g:"A",f:1,y:1982},{t:"All Dogs Go to Heaven",g:"A",f:1,y:1989},
+{t:"A Bug's Life",g:"A",f:1,y:1998},{t:"Toy Story 2",g:"A",f:1,y:1999},{t:"Antz",g:"A",f:1,y:1998},
+{t:"The Prince of Egypt",g:"A",f:1,y:1998},{t:"The Road to El Dorado",g:"A",f:1,y:2000},
+{t:"Anastasia",g:"A",f:1,y:1997},{t:"Balto",g:"A",f:1,y:1995},{t:"FernGully",g:"A",f:1,y:1992},
+{t:"The Swan Princess",g:"A",f:1,y:1994},{t:"The Rugrats Movie",g:"A",f:1,y:1998},
+{t:"Pokémon: The First Movie",g:"A",f:1,y:1998},{t:"James and the Giant Peach",g:"A",f:1,y:1996},
+{t:"A Goofy Movie",g:"A",f:1,y:1995},
+// comedy
+{t:"The Mighty Ducks",g:"C",f:1,y:1992},{t:"Cool Runnings",g:"C",f:1,y:1993},
+{t:"Beethoven",g:"C",f:1,y:1992},{t:"Richie Rich",g:"C",f:1,y:1994},
+{t:"Jingle All the Way",g:"C",f:1,y:1996},{t:"The Santa Clause",g:"C",f:1,y:1994},
+{t:"Flubber",g:"C",f:1,y:1997},{t:"George of the Jungle",g:"C",f:1,y:1997},
+{t:"Angels in the Outfield",g:"C",f:1,y:1994},{t:"The Little Rascals",g:"C",f:1,y:1994},
+{t:"Honey, I Shrunk the Kids",g:"C",f:1,y:1989},{t:"Who Framed Roger Rabbit",g:"C",f:0,y:1988},
+{t:"Wayne's World",g:"C",f:0,y:1992},{t:"Bill & Ted's Excellent Adventure",g:"C",f:0,y:1989},
+{t:"There's Something About Mary",g:"C",f:0,y:1998},{t:"The Wedding Singer",g:"C",f:0,y:1998},
+{t:"American Pie",g:"C",f:0,y:1999},{t:"Office Space",g:"C",f:0,y:1999},
+{t:"The Big Lebowski",g:"C",f:0,y:1998},{t:"Dazed and Confused",g:"C",f:0,y:1993},
+{t:"Empire Records",g:"C",f:0,y:1995},{t:"Bring It On",g:"C",f:0,y:2000},
+// sci-fi & fantasy
+{t:"Labyrinth",g:"F",f:1,y:1986},{t:"The NeverEnding Story",g:"F",f:1,y:1984},
+{t:"The Dark Crystal",g:"F",f:1,y:1982},{t:"Willow",g:"F",f:1,y:1988},
+{t:"Flight of the Navigator",g:"F",f:1,y:1986},{t:"Short Circuit",g:"F",f:1,y:1986},
+{t:"Hook",g:"F",f:1,y:1991},{t:"The Fifth Element",g:"F",f:0,y:1997},
+{t:"Total Recall",g:"F",f:0,y:1990},{t:"Starship Troopers",g:"F",f:0,y:1997},
+// action
+{t:"Terminator 2: Judgment Day",g:"X",f:0,y:1991},{t:"Con Air",g:"X",f:0,y:1997},
+{t:"Face/Off",g:"X",f:0,y:1997},{t:"The Rock",g:"X",f:0,y:1996},
+{t:"Armageddon",g:"X",f:0,y:1998},{t:"True Lies",g:"X",f:0,y:1994},
+{t:"Point Break",g:"X",f:0,y:1991},{t:"Waterworld",g:"X",f:0,y:1995},
+// scary
+{t:"Hocus Pocus",g:"S",f:1,y:1993},{t:"Casper",g:"S",f:1,y:1995},
+{t:"The Addams Family",g:"S",f:1,y:1991},{t:"The Witches",g:"S",f:1,y:1990},
+{t:"Gremlins",g:"S",f:0,y:1984},{t:"The Lost Boys",g:"S",f:0,y:1987},
+{t:"A Nightmare on Elm Street",g:"S",f:0,y:1984},{t:"Child's Play",g:"S",f:0,y:1988},
+{t:"The Blair Witch Project",g:"S",f:0,y:1999},{t:"I Know What You Did Last Summer",g:"S",f:0,y:1997},
+{t:"The Craft",g:"S",f:0,y:1996},{t:"Tremors",g:"S",f:0,y:1990},
+// romance & drama
+{t:"10 Things I Hate About You",g:"R",f:0,y:1999},{t:"She's All That",g:"R",f:0,y:1999},
+{t:"Cruel Intentions",g:"R",f:0,y:1999},{t:"Romeo + Juliet",g:"R",f:0,y:1996},
+{t:"Stand by Me",g:"R",f:0,y:1986},{t:"Say Anything",g:"R",f:0,y:1989},
+{t:"Pretty in Pink",g:"R",f:0,y:1986},{t:"Good Will Hunting",g:"R",f:0,y:1997},
+{t:"Sleepless in Seattle",g:"R",f:0,y:1993},{t:"My Best Friend's Wedding",g:"R",f:0,y:1997},
+{t:"Homeward Bound",g:"R",f:1,y:1993},{t:"Fly Away Home",g:"R",f:1,y:1996},
+// musicals
+{t:"Newsies",g:"M",f:1,y:1992},{t:"That Thing You Do!",g:"M",f:1,y:1996},
+{t:"Almost Famous",g:"M",f:0,y:2000},{t:"Spice World",g:"M",f:1,y:1997},
+{t:"The Muppet Christmas Carol",g:"M",f:1,y:1992}
+);
+
+const HINT_RAW5=[
+"The Land Before Time|the long-neck saying his name for the first time, slowly;the little one insisting on 'yep yep yep';the mother telling him to let his heart guide him;the friends arguing over who gets the tree star|Littlefoot,Longneck,Ducky,Petrie,Spike,Cera,Dinosaur,Valley,Treestar,Sharptooth|Newborn dinosaur — hatch from an egg and wobble on brand-new legs;Tree star — reach up for one leaf and hold it like treasure;The earthquake — the ground splits and you cling to one side;Yep yep yep — a tiny cheerful one nodding three times at everything;Nudge the body — push at a parent who won't wake up|Theme: 'If We Hold On Together' — the big Diana Ross ballad over the ending. The score itself is huge, sad strings.",
+"An American Tail|the mouse calling out for his sister across the water;there are no cats in America;the song about the same bright star;the family being told the streets are paved with cheese|Fievel,Mouse,Immigrant,Russia,Cats,Statue,Liberty,Tanya,Hat,Boat|Tiny hat — a hat far too big sliding down over your eyes;Lost overboard — get swept off a ship in a storm, reaching back;Same star — two mice on opposite sides of a city singing to the sky;No cats — a whole crowd celebrating, then a cat appears;Giant mouse of Minsk — wheel out a huge fake mouse on wheels|Theme: 'Somewhere Out There' — the duet two mice sing to the same star. Everybody's parents cried at this.",
+"The Secret of NIMH|the mouse being told to take the stone;the owl in the tree giving terrifying advice;the rats explaining they were made smart in a laboratory;the widow being told she must move the house before the plough|Mrs.Brisby,Rats,NIMH,Nicodemus,Owl,Stone,Amulet,Jenner,Plough,Sparrow|The amulet — a red stone glowing and lifting a whole house out of mud;Meet the owl — creep into a dark tree and back away from enormous eyes;Lab rats — rats in cages getting injections, then reading the labels;The plough — a tractor blade coming and you're too small to stop it;Carry a sick child — a mouse mother dragging a feverish kid to safety|",
+"All Dogs Go to Heaven|the dog saying he's back and he's not going quietly;the watch that must never stop;the little girl who can talk to animals;the dog cheating his way out of heaven|Charlie,Heaven,Watch,Anne-Marie,Casino,Itchy,Dachshund,Carface,Whippet,Bark|Wind the watch — a pocket watch you must never let stop ticking;Back from heaven — sneak away from pearly gates with a smug grin;The rat sidekick — a scruffy little dog scratching nonstop;Rigged race — bet on a dog race you already fixed;The nightmare — sink into a red, fiery place and wake up screaming|",
+"A Bug's Life|the inventor ant saying he's got an idea;'pretend that's a seed' and then a rock;the circus bugs being mistaken for warriors;the grasshoppers demanding double the food|Ant,Flik,Colony,Grasshopper,Hopper,Circus,Princess,Atta,Seed,Bird|Pretend it's a seed — hold a pebble, then a boulder, and gesture 'imagine';The fake bird — build a giant bird out of leaves and fly it at bullies;Circus bugs — a stick insect, a ladybug who is a man, and a fat caterpillar;Assembly line — a huge line of ants passing grain, one dropping it;Grasshopper landing — a swarm thuds down and everyone cowers|",
+"Toy Story 2|the cowgirl's song about being loved and then abandoned;the toy collector saying he's worth a fortune;the space ranger meeting a whole aisle of himself;you never forget kids like Emily, but they forget you|Jessie,Woody,Stinky,Pete,Bullseye,Collector,Museum,Al,Yodel,Arm|Torn arm — your arm rips at the seam and you stare at it in horror;Toy store aisle — meet a hundred identical copies of yourself;The yodel — a cowgirl bouncing off walls yodeling;Left under the bed — sit alone in a dusty box being forgotten;Cross the road — toys under traffic cones shuffling across a highway|Theme: 'When She Loved Me' — the quiet Sarah McLachlan song over the cowgirl's flashback. Devastating.",
+"Antz|the neurotic worker ant complaining about his childhood;'I'm not a soldier, I'm a worker';the princess dancing with a nobody at the bar;the colony being told to dig|Ant,Worker,Z,Bala,Colony,Insectopia,Neurotic,General,Termite,Tunnel|Therapy ant — lie on a couch and complain about being the middle child of five million;Dance wrong — do a rigid line dance, then break into something freeform;Ant ball — lock arms with others to make a living bridge;Termite fight — get squirted with acid by an enormous soldier;Magnifying glass — a beam of light burning down from the sky|",
+"The Prince of Egypt|the burning bush speaking a name twice;the brothers racing chariots through the city;'let my people go';the plagues arriving one after another|Moses,Egypt,Plagues,Rameses,Nile,Burning,Bush,Sea,Basket,Brothers|Part the sea — raise a staff and hold two walls of water apart;Burning bush — kneel and shield your eyes from a voice in a flame;Chariot race — two brothers wrecking a city street for fun;Baby in the basket — float a baby down a river past crocodiles;Staff to snake — throw down a stick and recoil as it writhes|Theme: 'When You Believe' — the huge Whitney Houston and Mariah Carey duet. Also 'Deliver Us', the opening chant.",
+"The Road to El Dorado|two con men flipping a loaded coin;'both' — 'both is good';the city of gold appearing behind a waterfall;the pair pretending to be gods|Gold,Tulio,Miguel,Conmen,Altivo,Horse,Chief,Maps,Armadillo,City|Loaded coin — flip a two-headed coin and shrug innocently;Pretend to be a god — stand on a temple step looking bored and divine;The horse — a horse that acts exactly like a dog;Waterfall reveal — push back vines and be blinded by gold;Play the lute badly — strum and sing while your friend cringes|Theme: 'It's Tough to Be a God' — Elton John. Also 'Friends Never Say Goodbye'.",
+"Anastasia|the woman remembering a music box lullaby;the grandmother testing whether she's really the lost princess;the villain's rotting green hands falling off;'journey to the past'|Princess,Anya,Dimitri,Rasputin,Bartok,Musicbox,Paris,Romanov,Train,Bat|Music box — open a small gold box and freeze as the tune unlocks a memory;Falling apart — a villain whose hand keeps detaching and crawling back;The train — leap between carriages as the bridge collapses;Learn to be royal — get taught to curtsy and hold a teacup properly;The bat — a small white bat sighing at his master's nonsense|Theme: 'Once Upon a December' — the ghostly waltz in the empty ballroom. Also 'Journey to the Past'.",
+"Balto|the half-wolf being told what he is;the dogs racing serum across the ice;the goose with the Russian accent coaching him;the bottle on the frozen lake|Wolf,Husky,Sled,Nome,Serum,Jenna,Boris,Goose,Alaska,Blizzard|Pull a sled — lean into a harness through a whiteout;Half wolf — get shunned by dogs and howled at by wolves;The goose coach — a Russian goose flapping motivational nonsense;Climb the cliff — drag a crate of medicine back up a rock face;Northern lights — sit in snow watching the sky go green|",
+"FernGully|the fairy shrinking a logger down to her size;the oil-slick villain rising out of the machine;the bat singing about batty rap;the tree with the black smoke|Fairy,Rainforest,Crysta,Zak,Batty,Hexxus,Logger,Leveler,Sprite,Smog|Shrink — a full-sized human suddenly fairy-sized and panicking;The bat — a twitchy bat with wires in his head rapping;Oily villain — ooze out of a machine as living black smoke;Paint the tree — mark a tree with a red X for cutting;Grow it back — hold your hands out and grow a whole forest|",
+"The Swan Princess|the princess turning into a swan whenever the moon is out;'what else is there?' about her being beautiful;the frog, the turtle and the puffin as a rescue team;the vow being made to the wrong person|Swan,Odette,Derek,Rothbart,Lake,Moon,Jean-Bob,Speed,Puffin,Vow|Swan at moonrise — a woman folding into a swan as the moon comes up;What else is there — say something charming and watch it land terribly;Animal rescue squad — a frog, a turtle and a puffin planning a heist;The great animal — a villain morphing into a huge winged beast;Skid across the lake — land on water and slide|",
+"The Rugrats Movie|the babies deciding to return the new brother;'a baby's gotta do what a baby's gotta do';the dog-catching wagon in the woods;the monkeys stealing everything|Babies,Tommy,Chuckie,Angelica,Dil,Reptar,Wagon,Monkeys,Diaper,Screwdriver|Baby escape — toddlers building a wagon and rolling into the forest;The screwdriver — a baby pulling a tool from his nappy to fix everything;Reptar wagon — ride a plastic dinosaur cart down a hill;Monkeys — a troupe of monkeys stealing a doll and scattering;Big brother — hold a newborn at arm's length, unimpressed|",
+"Pokémon: The First Movie|the cloned one asking who made him;the boy turning to stone between two fighting monsters;'I see now that the circumstances of one's birth are irrelevant';the pikachu refusing to fight its own clone|Pikachu,Mewtwo,Ash,Clone,Trainer,Pokeball,Battle,Team,Rocket,Stone|Throw the ball — hurl a ball underarm and point dramatically;Turn to stone — walk between two blasts and freeze grey mid-step;The clones — everyone meets an identical angry copy of themselves;Electric cheeks — puff your cheeks and spark;Cry the hero back — a whole crowd weeping onto a statue|",
+"James and the Giant Peach|the boy being told about the magic crocodile tongues;the peach rolling over the aunts' house;the bugs introducing themselves one by one;steering the peach with seagulls|Peach,James,Aunts,Grasshopper,Spider,Centipede,Ladybug,Seagulls,Rhino,Crocodile|Giant fruit — a peach growing until it snaps off the tree;Squash the aunts — a huge fruit rolling flat over two horrible women;Seagull harness — lasso birds and fly a peach through clouds;Bug band — a grasshopper on violin and a centipede in many boots;Green tongues — spill a bag of wriggling magic and watch it burrow|",
+"A Goofy Movie|the dad dragging his son on a fishing trip;the perfect cast;the son pretending to be the pop star on stage;'you're not gonna lose him, you're just gonna find him'|Goofy,Max,Roxanne,Powerline,Fishing,Possum,Park,Roadtrip,Cast,Dance|The perfect cast — an elaborate fishing dance with hips and hat;Possum park — a horrifying animatronic possum show;Stage crash — get pushed onstage at a concert and have to dance;Dad embarrassment — wave enthusiastically at your teenager in public;Car on two wheels — a station wagon tipping onto a cliff edge|Theme: 'I2I' — the concert song at the end. Also 'Stand Out', the one he mimes on the roof."
+];
+
+const HINT_RAW5B=[
+"The Mighty Ducks|the coach teaching the flying V;'quack quack quack';the lawyer being sentenced to coach a kids' team;the knuckle puck kid being told to take the shot|Ducks,Hockey,Bombay,Flying,Quack,Knuckle,Puck,Coach,Team,Charlie|Flying V — a wedge of skaters bearing down the ice in formation;Quack chant — a whole crowd flapping their arms and quacking;Knuckle puck — drop to your knees and shove a puck along the ice;Drunk-driving sentence — a lawyer in a suit handed a whistle in court;The penalty shot — one kid alone against a goalie, everything silent|",
+"Cool Runnings|'feel the rhythm, feel the rhyme';the coach explaining why he cheated;the team pushing the sled down a Jamaican street;carrying the bobsled over the finish line|Jamaica,Bobsled,Olympics,Sanka,Derice,Coach,Irv,Egg,Calgary,Push|Push start — four men sprinting behind a sled and piling in;Jamaican winter — step off a plane into snow in shorts;Kiss the egg — a lucky egg kissed before every single run;Mirror pep talk — 'I see pride, I see power' in a bathroom mirror;Carry it over — the sled crashes and you lift it across the line|Theme: 'I Can See Clearly Now' — the Jimmy Cliff version over the credits. Bright, sunny, reggae.",
+"Beethoven|the huge dog drooling on everything;the vet with the plan for the dog;the dad hating the dog and then not;the dog wrecking the house before the dinner party|Dog,SaintBernard,Newton,Vet,Drool,Family,Emily,Ball,Bath,Ryce|Enormous dog — a dog so big it takes up a whole sofa;The drool — a long string of drool landing on someone's shoe;Bath disaster — wash a dog and flood an entire bathroom;Evil vet — a kindly vet who is secretly awful;Dad relents — stomp about hating the dog, then hug it|",
+"Richie Rich|the richest kid in the world with his own McDonald's;the butler doing everything;the kid asking a friend over and not knowing how friends work;the vault built into a mountain|Rich,Butler,Cadbury,Mountain,Vault,Money,Mansion,Rollercoaster,Professor,Friends|Private everything — your own burger place, your own rollercoaster;The butler — deadpan service through absolute chaos;Learn to play — a rich kid awkwardly joining a street baseball game;Mount Richmore — four faces carved into a mountain;The vault — a door the size of a house swinging open|",
+"Jingle All the Way|the dad hunting the last action figure on Christmas Eve;'put that cookie down';the mall riot over the toy;the rival dad in the postal uniform|Turboman,Toy,Christmas,Howard,Myron,Mall,Reindeer,Dad,Riot,Parade|Toy hunt — tear through a shop for the last box on the shelf;Mall brawl — a crowd of parents fighting over one present;Jetpack — end up in a costume actually flying above a parade;Postman rival — a wild-eyed man in a mail uniform racing you;Put the cookie down — bark into a phone mid-chase|",
+"The Santa Clause|the dad putting on the suit and being stuck with the job;the gaining weight and the beard growing back;the kid telling his teacher the truth;the sleigh appearing on the roof|Santa,Scott,Suit,Elves,Charlie,Reindeer,Beard,Northpole,Clause,Chimney|Beard grows back — shave, then instantly have a full white beard;Gain the weight — button a jacket that no longer closes;Down the chimney — squeeze into a fireplace and pop out covered in soot;Read the card — find tiny print on a business card and realise the deal;Elf boss — a very small person who is clearly in charge|",
+"Flubber|the professor inventing green bouncing goo;the flying car;the goo dancing to a mambo;the professor forgetting his own wedding three times|Flubber,Professor,Brainard,Green,Goo,Weebo,Bounce,Basketball,Wedding,Robot|Bouncing goo — a green blob that bounces higher every time;Flubber shoes — put goo on trainers and bounce over everyone's heads;The mambo — a blob splitting into tiny dancers doing a routine;Flying car — a hatchback lifting off a driveway;Miss the wedding — check a watch, panic, and be too late again|",
+"George of the Jungle|'watch out for that tree';the jungle man swinging into trunks;the talking ape who is very well spoken;the narrator arguing with the characters|Jungle,George,Ape,Ursula,Tree,Swing,Vine,Narrator,Tookie,Shep|Swing into a tree — grab a vine, swing gloriously, hit a trunk face-first;Posh ape — a gorilla speaking in a plummy English accent;Elephant dog — whistle and have a huge elephant bound over like a puppy;Narrator argument — look up and argue with a voice from the sky;Tarzan yell done badly — a mighty jungle cry that cracks|Theme: the 'George, George, George of the Jungle' chant — the whole song is basically the title.",
+"Angels in the Outfield|the boy flapping his arms to signal an angel;the manager being told to wait for the team;the angels lifting the fielders;'it could happen'|Angels,Baseball,Roger,Knox,Wings,Flap,Team,Foster,Believe,Outfield|Flap for angels — flap your arms to tell the crowd angels are here;Invisible lift — get carried through the air catching an impossible ball;Whole stadium flaps — everybody in the crowd flapping at once;Gruff manager — a shouting coach slowly turning soft;It could happen — a hopeful kid shrugging at the sky|",
+"The Little Rascals|the He-Man Woman Haters Club;the go-kart race;the boy in love with Darla and getting caught;the club house burning down|Spanky,Alfalfa,Darla,Buckwheat,Petey,Gokart,Club,Cowlick,Froggy,Race|The cowlick — spit-slick your hair and leave one bit sticking straight up;Woman haters club — boys holding a very serious meeting about girls;Go-kart race — pedal a homemade cart downhill against bullies;Serenade — sing badly and out of tune to a girl in a boat;Dog with a ring round its eye — a scruffy dog with a painted circle|",
+"Honey, I Shrunk the Kids|the dad shrinking the kids with his attic machine;riding the ant;the giant bowl of cereal with a kid in it;crossing the back garden like a jungle|Shrink,Wayne,Attic,Ant,Lawn,Cereal,Sprinkler,Bee,Garden,Machine|Tiny in the grass — push through grass blades as tall as trees;Ride the ant — saddle up an ant and gallop across the lawn;The cereal — nearly get eaten in a spoonful of cornflakes;The sprinkler — dodge waterdrops the size of cars;Shout at a giant — wave desperately at an enormous unhearing parent|",
+"Who Framed Roger Rabbit|the cartoon rabbit only doing it when it's funny;'I'm not bad, I'm just drawn that way';the detective who hates toons;the dip and the weasels|Toon,Roger,Jessica,Eddie,Dip,Weasels,Acme,Toontown,Judge,Patty-cake|Handcuffed to a cartoon — drag a hysterical rabbit who slips the cuffs at will;Only when it's funny — fail at something, then do it perfectly for the laugh;The dip — a barrel of green liquid that melts cartoons;Laughing weasels — henchmen who literally die laughing;Cartoon and human in one shot — talk to something at your elbow that isn't there|",
+"Wayne's World|'party on';the basement cable show;the head-banging in the car to a Queen song;'we're not worthy'|Wayne,Garth,Basement,Aurora,Cable,Excellent,Schwing,Bohemian,Mirthmobile,Party|Head-bang in the car — four people banging heads in unison in a hatchback;We're not worthy — drop to your knees and bow at someone;Basement show — present a talk show to a camcorder from a sofa;Doughnut shop philosophy — say something profound over coffee at 3am;Say 'not' after a compliment — praise someone, pause, then undercut it|Theme: 'Bohemian Rhapsody' — the car scene made a whole generation know the head-bang part.",
+"Bill & Ted's Excellent Adventure|two slackers travelling in a phone box;'be excellent to each other';the history report with real historical figures;air guitar after every good idea|Phonebox,Bill,Ted,Excellent,Rufus,History,Napoleon,Socrates,Bogus,Guitar|Air guitar — a loud air-guitar riff after anything remotely good;Phone box time machine — step into a phone booth and lurch through time;Historical kidnapping — bundle a confused Napoleon into a shopping mall;San Dimas High School football rules — shout it at no one;Be excellent — put two fingers up in peace and say something sincere|",
+"There's Something About Mary|the zipper scene;the hair gel;the private detective falling for the girl he's following;the dog on a lot of medication|Mary,Ted,Zipper,Gel,Dog,Detective,Prom,Healy,Braces,Frank|The zipper — freeze and wince, jaw clenched, not moving an inch;Hair gel — smooth something into your fringe and stand it straight up;The dog fight — wrestle a small deranged terrier;Prom night ruined — get led out of a bathroom by a policeman in a suit;Fake a job — lie confidently about being an architect|",
+"The Wedding Singer|the singer left at the altar;the angry song at the reception;'somebody kill me please';the song written on the plane|Robbie,Julia,Wedding,Singer,Glenn,Eighties,Band,Altar,Plane,Linda|Sing angry at a reception — croon, then scream, then croon again;Left at the altar — sit on a church step in a frilly shirt;Teach an old lady — take a meatball as payment for singing lessons;The plane proposal — sing to someone over an intercom in an aisle;Eighties hair — big hair, skinny tie, fingerless gloves|Theme: 'Grow Old With You' — the little song at the end. The soundtrack is wall-to-wall eighties.",
+"American Pie|the boy and the dessert on the counter;the band camp story;'this one time…';the webcam disaster|Pie,Jim,Stifler,Band,Camp,Prom,Nadia,Finch,Oz,Webcam|Caught by dad — someone walks in, and you both pretend everything is normal;Band camp — start every sentence with 'this one time at…';The webcam — realise the whole school is watching a live feed;Sex education from dad — receive extremely awkward advice with magazines;Drink the wrong cup — take a big gulp and immediately regret it|",
+"Office Space|'if you could just go ahead';the red stapler;the printer in the field;the three bosses all asking about the cover sheet|Cubicle,TPS,Stapler,Lumbergh,Milton,Printer,Initech,Peter,Bobs,Flair|Lean on the cubicle — hold a coffee mug and say 'yeah, if you could just…';The stapler — clutch a red stapler and mutter about moving desks;Destroy the printer — take a baseball bat to office equipment in a field;Pieces of flair — get told your fifteen badges aren't enough;Hypnotised calm — become serenely uninterested in your own job|",
+"The Big Lebowski|the rug that really tied the room together;'the Dude abides';bowling;the man with the ferrets in the bath|Dude,Rug,Bowling,Walter,Donny,White,Russian,Lebowski,Nihilists,Abide|The rug — explain at length that it tied the room together;White Russian — mix a drink, sniff the milk, drink it anyway;Bowling rage — pull a gun over whether a toe was over the line;Dressing gown — shuffle round a supermarket in a robe and shades;Ashes in the wind — scatter ashes from a coffee tin, badly|",
+"Dazed and Confused|'alright alright alright';the last day of school in 1976;the freshmen getting paddled;the hunt for Aerosmith tickets|Seventies,Wooderson,Freshman,Paddle,Texas,Keg,Mitch,Slater,Moontower,Tickets|Alright alright alright — lean back in a car seat, drawl it three times;Paddle the freshmen — chase a younger kid round a car park with a plank;Keg party in a field — stand around a barrel under a water tower;The stoner theory — explain something ridiculous with total conviction;I get older, they stay the same age — say it while leaning on a bonnet|Theme: 'Slow Ride' by Foghat over the ending drive. The soundtrack is pure seventies rock.",
+"Empire Records|'damn the man, save the Empire';the night manager gambling the takings;the record shop staff staying up all night;shaving her head in the bathroom|Record,Store,Empire,Lucas,Corey,Gina,Deb,Rexmanning,Vinyl,Manager|Damn the man — raise a fist behind a shop counter;Lose the takings — put the day's money on black in a casino;Shave it off — take clippers to your own head in a staff toilet;Rex Manning Day — a washed-up pop star signing autographs nobody wants;Rooftop dance — dance on the roof of a record shop at dawn|",
+"Bring It On|the cheer squad discovering their routines were stolen;'I'm sexy, I'm cute';the spirit fingers coach;the two squads facing off at nationals|Cheer,Torrance,Clovers,Spirit,Fingers,Routine,Squad,Missy,Isis,Nationals|Spirit fingers — waggle your fingers with a horribly intense smile;The stolen routine — watch another squad perform your exact moves;Toss the flyer — throw someone into the air and catch them;Cheer-off in a car park — two squads trading routines on tarmac;The choreographer — a dreadful man teaching everyone the same dance|"
+];
+
+const HINT_RAW5C=[
+"Labyrinth|the girl wishing her baby brother away and regretting it instantly;'you have no power over me';the goblin king's crystal balls;the two doors and the two guards who lie|Goblin,Sarah,Jareth,Baby,Maze,Crystal,Hoggle,Ludo,Bowie,Owl|Contact juggling — roll a crystal ball over the backs of your hands;Stairs going every way — walk up a staircase that is also sideways;The bog of eternal stench — step in something and gag theatrically;Wish him away — say the words, then instantly panic;Goblin king's hair — enormous hair, enormous shoulder pads, enormous confidence|Theme: 'Magic Dance' — the Bowie song with the goblins, the one that goes 'you remind me of the babe'.",
+"The NeverEnding Story|the boy reading in the school attic;the horse in the swamp of sadness;the luck dragon;the nothing eating the world|Bastian,Atreyu,Falkor,Artax,Fantasia,Nothing,Swamp,Rockbiter,Empress,Book|Read and get pulled in — read a book and slowly realise it's about you;The horse sinks — beg an animal to keep moving as it gives up;Ride the luck dragon — fly on a giant white flying dog;The rockbiter — a huge stone creature staring at his own hands;Shout the name — scream a name out of a window into a storm|Theme: the Limahl title song — the synthy eighties one that just repeats the title.",
+"The Dark Crystal|the shard that must be put back before the suns align;the vulture-like villains screeching;the gentle wrinkled giants;'what was sundered and undone shall be whole'|Crystal,Shard,Skeksis,Mystics,Jen,Kira,Gelfling,Aughra,Podling,Suns|Puppet everything — move like something not quite human, all texture;The screeching villains — hunched, robed, squabbling over a carcass;Three suns align — look up and shield your eyes from three lights;Place the shard — push a fragment into a crystal and brace;The one-eyed astronomer — take your own eye out to look at something|",
+"Willow|the little farmer finding a baby in the reeds;the swordsman in the crow's cage;'you are great Willow, a great sorcerer';the two-headed monster|Willow,Elora,Danan,Madmartigan,Sorcerer,Bavmorda,Baby,Brownies,Nelwyn,Wand|Find the baby — pull a basket out of a river and look around helplessly;Caged swordsman — hang in a crow cage bargaining for release;Tiny warriors — two thumb-sized men with enormous attitude;The wand trick — make a pig, then fail, then get it right;Turn the sorceress to stone — hold your nerve and say the words|",
+"Flight of the Navigator|the boy who disappears for eight years and hasn't aged;the ship that talks and learns slang;'compliance';the alien map of everywhere|Navigator,David,Max,Ship,NASA,Aliens,Eighties,Compliance,Brother,Map|Eight years gone — walk into your own house and not recognise your brother;The robot voice — start flat and mechanical, end up talking like a surfer;Silver ship — a mirrored blob that reshapes itself;Compliance — say one word in a robot monotone and comply;Fly too fast — get pinned to a seat by speed and whoop|",
+"Short Circuit|'number five is alive';the robot reading books at high speed;the soldiers trying to shut him down;the robot doing impressions|Robot,Number,Five,Johnny,Alive,Input,Newton,Stephanie,Laser,Military|Number five is alive — announce it in a clipped electronic voice;Input — grab books and flip pages at impossible speed shouting 'input';Robot impressions — a machine suddenly doing celebrity voices;Play dead — a robot pretending to be a broken pile of parts;Disassemble — plead 'no disassemble' with genuine fear|",
+"Hook|the grown-up lawyer who forgot he was Peter Pan;'bangarang';the imaginary feast that becomes real food;'you are the Pan'|Peter,Banning,Hook,Tinkerbell,Rufio,Bangarang,Neverland,Thinkhappy,Crocodile,Feast|Adult who can't fly — run and jump and just fall over;Bangarang — a mohawked kid leading a war cry;The imaginary feast — mime eating nothing until it becomes a food fight;The crowing — try to crow, fail, fail, then get it;Hook's hook — a curled hand and a very long wig|Theme: the John Williams flying theme — swaggering, brassy, hugely eighties Spielberg.",
+"The Fifth Element|the blue alien opera singer;'multipass';the taxi driver in a future New York;'leeloo dallas multipass'|Leeloo,Korben,Multipass,Diva,Zorg,Taxi,Ruby,Rhod,Elements,Fifth|Multipass — hold up a card and repeat the word insistently;Blue opera diva — sing something operatic, then break into a dance beat;Flying taxi — dodge traffic that is stacked vertically;Orange strappy outfit — wrap yourself in bandages and look confused;The loud radio host — talk at double speed in a leopard-print outfit|",
+"Total Recall|the memory holiday that goes wrong;'get your ass to Mars';the woman's head that opens up;two weeks|Mars,Quaid,Recall,Memory,Implant,Mutant,Kuato,Twoweeks,Oxygen,Disguise|Rip off the disguise — pull a fake head apart and throw it;Two weeks — say it in a flat robotic woman's voice;Eyes bulge on Mars — gasp and bug your eyes in thin air;The memory chair — sit in a salon chair and get a holiday installed;Little man in the belly — talk to something coming out of your stomach|",
+"Starship Troopers|'would you like to know more?';the co-ed shower scene;the bugs swarming the outpost;'service guarantees citizenship'|Bugs,Troopers,Rico,Citizen,Klendathu,Propaganda,Arachnid,Dizzy,Brainbug,Service|Recruitment advert — grin straight at camera and sell a terrible war;Bug swarm — a hill of giant insects pouring over a wall;Would you like to know more — say it brightly after something horrific;Brain bug — a quivering blob that sucks out a skull;Lose an arm and keep going — get maimed and cheerfully carry on|"
+];
+const HINT_RAW5D=[
+"Terminator 2: Judgment Day|'hasta la vista, baby';the boy teaching the robot to say 'no problemo';the liquid metal cop reforming;'I need your clothes, your boots and your motorcycle'|Terminator,John,Connor,T1000,Liquid,Metal,Sarah,Skynet,Thumbsup,Hastalavista|Liquid metal — get shot, ripple, and smooth over as if nothing happened;Arms into blades — point and let a finger become a spike;Thumbs up into the lava — sink slowly with one thumb raised;Learn to smile — a machine practising a human grin in a mirror;The shotgun spin — cock a shotgun one-handed on a motorbike|Theme: the clanging metal-on-anvil theme — that industrial hammer beat.",
+"Con Air|'put the bunny back in the box';the plane full of convicts;the stuffed rabbit for his daughter;the long hair and the vest|Bunny,Cameron,Poe,Cyrus,Plane,Convicts,Hair,Vest,Larkin,Prison|Put the bunny back in the box — threaten someone very quietly over a soft toy;The hair — long flowing hair in slow motion;Plane full of criminals — everyone in chains and nobody behaving;Crash landing on the strip — a plane sliding down Las Vegas;The birthday present — protect a stuffed rabbit through an entire riot|Theme: 'How Do I Live' by Trisha Yearwood — the enormous ballad over the ending.",
+"Face/Off|the cop and the criminal swapping faces;'I'd like to take his face… off';the mirror standoff;the priest with the two guns and the doves|Face,Archer,Troy,Swap,Surgery,Doves,Mirror,FBI,Church,Gold|Take his face off — say it with a strange savour, cheek twitching;Two-gun doves — spin round a church with birds everywhere;Mirror standoff — two men point guns at each other through a two-way mirror;Wear someone's face — study your own reflection wearing a stranger;Gold shoes — swagger in ridiculous clothes|",
+"The Rock|the tourist tour guide who's been in Alcatraz;the chemist who's never fired a gun;the green gas rockets;'welcome to the Rock'|Alcatraz,Mason,Goodspeed,Rockets,Gas,Marines,Hummel,Tunnels,Chemist,Prison|Tunnels under the prison — crawl through wet dark stone;Green gas ball — handle a glass sphere like it's about to kill everyone;Adrenaline to the heart — stab yourself in the chest and howl;Only man to escape — a silver-haired Englishman being smug about it;Flare at the end — fire a green flare from an island|",
+"Armageddon|the oil drillers sent to space;'I don't want to miss a thing';the animal crackers;the dad staying behind on the asteroid|Asteroid,Harry,AJ,Drillers,NASA,Space,Shuttle,Grace,Crackers,Bomb|Drill on an asteroid — brace against a rock hurtling through space;Animal crackers — walk crackers up someone's stomach;Train like astronauts — a group of unruly roughnecks failing every test;Say goodbye on a screen — talk to your daughter through static;Press the button yourself — stay behind and salute|Theme: 'I Don't Want to Miss a Thing' — the Aerosmith power ballad. Unavoidable in 1998.",
+"True Lies|the wife who thinks her husband is a boring salesman;the horse in the lift;the harrier jet;the tango|Spy,Harry,Helen,Tasker,Tango,Harrier,Horse,Salesman,Bridge,Gib|Secret agent husband — fight a battle, then come home and discuss the dishwasher;Horse in a lift — ride a horse into a hotel lift and look at the buttons;The jet rescue — pluck someone off a bridge in a hovering jet;The tango — dance a serious tango in evening dress;Interrogate your own wife — question her through a mirror in a distorted voice|",
+"Point Break|the FBI agent surfing with bank robbers;the presidents' masks;'vaya con Dios';firing a gun into the air in frustration|Surf,Bodhi,Utah,Presidents,Masks,FBI,Skydive,Bank,Wave,Adrenaline|President masks — rob a bank in a rubber ex-president face;Fire in the air — chase someone, catch them in your sights, and shoot the sky instead;Skydive with no chute — leap out and grab someone mid-air;The hundred year storm — walk into an impossible wave and not come back;Foot chase over fences — vault gardens and take a dog to the leg|",
+"Waterworld|the world with no land;the man with gills behind his ears;the smokers on the oil tanker;dirt as the most valuable thing there is|Mariner,Water,Gills,Atoll,Smokers,Deacon,Enola,Dryland,Tanker,Trimaran|Gills — pull your hair aside to show slits behind your ears;Drink your own recycled water — operate a machine and grimace at the result;Trade dirt — hold up a jar of soil like it's diamonds;The tattooed map — a map of dry land inked on a child's back;Jetski raiders — a horde of engines circling a floating village|"
+];
+const HINT_RAW5E=[
+"Hocus Pocus|the black flame candle;the three witches back from 1693;'I put a spell on you';the talking cat who is a cursed boy|Witches,Sanderson,Salem,Candle,Binx,Cat,Broom,Max,Dani,Halloween|Three witches — a bucktoothed one, a dim one and a bossy one in a line;Light the candle — strike a match under a skull candle and jump back;Fly on a vacuum — soar on a hoover because there aren't enough brooms;The talking cat — a cat explaining it's been alive three hundred years;Sing to hypnotise — perform a full stage number at a school hall|Theme: 'I Put a Spell on You' — the big number the witches perform at the party.",
+"Casper|the friendly ghost and the girl who moves in;the three uncles;'can I keep you?';the machine that brings ghosts back|Ghost,Casper,Kat,Whipstaff,Uncles,Stretch,Lazarus,Friendly,Attic,Mansion|Float through a wall — walk at a wall and pass through it;Three awful uncles — a fat one, a thin one and a loud one causing havoc;Make breakfast as a ghost — cook with everything flying around you;Become a boy for one dance — turn solid at the top of a staircase;Can I keep you — ask it hopefully, then be devastated|Theme: 'Remember Me This Way' — the Jordan Hill ballad over the credits.",
+"The Addams Family|the finger snaps;the hand that walks;'he's just a boy, he can't be more than ten';the family who love everything morbid|Gomez,Morticia,Wednesday,Thing,Hand,Fester,Lurch,Snaps,Pugsley,Creepy|Two snaps — the finger-snap theme, done twice;The walking hand — a hand scuttling across a table on its fingers;Deadpan daughter — say something horrifying with a flat face and plaits;The butler groans — a very tall man who only says 'you rang';Tango with a sword in your teeth|Theme: the finger-snap theme — 'they're creepy and they're kooky'. The two snaps are the whole clue.",
+"The Witches|the hotel conference that's a witches' convention;the boy turned into a mouse;the wigs coming off;the formula in the soup|Witches,Mouse,Grandmother,Hotel,Wig,Grandhigh,Formula,Luke,Toes,Soup|Peel off the wig — scratch your head, then lift your whole scalp;Square toes — take off a shoe and wince at your own foot;Turn into a mouse — shrink and scrabble along a skirting board;Witch convention — a room of respectable ladies who all hate children;Slip it in the soup — tip a bottle into a pot in a hotel kitchen|",
+"Gremlins|the three rules — no light, no water, no food after midnight;the cute one in the box at Christmas;the creatures in the cinema;the one in the microwave|Gizmo,Mogwai,Gremlin,Rules,Midnight,Water,Billy,Kingston,Stripe,Christmas|Three rules — hold up three fingers and recite them very seriously;Splash and multiply — get water on you and pop into more of yourself;Gremlin in a blender — a creature meeting a kitchen appliance;Cinema full of monsters — a whole audience of cackling green things;The cute one — big ears, huge eyes, singing a little tune|",
+"The Lost Boys|the vampires on the boardwalk;'sleep all day, party all night';the Chinese food that turns into maggots;the saxophone man|Vampires,Santa,Carla,Boardwalk,Michael,Star,Frog,Brothers,Maggots,Blood|Hang under a bridge — cling to a railway bridge and let go;Maggot rice — look down at your takeaway and drop it;Comic shop vampire hunters — two intense kids handing out pamphlets;Saxophone man — an oiled shirtless sax solo on a stage;Boardwalk motorbikes — a gang of mullets on bikes at dusk|Theme: 'Cry Little Sister' — the gothic choir-and-organ song. Also the saxophone man's number.",
+"A Nightmare on Elm Street|one, two, he's coming for you;the glove with the knives;the girl falling asleep in the bath;'whatever you do, don't fall asleep'|Freddy,Krueger,Glove,Dream,Nancy,Elmstreet,Sleep,Jumprope,Boiler,Hat|The glove — flex four knife-fingers and scrape them down a wall;Don't fall asleep — slap yourself awake, again, and again;Skipping rhyme — chant a children's counting song, sinister and slow;Bath grab — sink in a bath and get pulled under;Wall bulges — press your face and hands through a ceiling|Theme: the children's skipping rhyme — 'one, two, Freddy's coming for you'. Sung by kids. Horrible.",
+"Child's Play|the doll that is a serial killer;'hi, I'm Chucky, wanna play?';the mother realising the batteries were never in;the boy nobody believes|Doll,Chucky,Andy,Goodguy,Batteries,Voodoo,Karen,Redhair,Play,Knife|Doll goes still — chat away, then freeze into plastic when someone enters;Wanna play — say it in a bright toy voice, then drop into a growl;No batteries — open a doll's back and find the compartment empty;Nobody believes the kid — insist frantically while adults sigh;Doll runs — scuttle at ankle height with a kitchen knife|",
+"The Blair Witch Project|the camera in the woods;the pile of stones;'I'm so sorry';the last shot of someone facing the corner|Woods,Camera,Witch,Heather,Josh,Mike,Stones,Map,Tent,Corner|Face the corner — stand facing a wall, silent, back to the room;Cry into the camera — extreme close-up, nose and eyes only, snotty apology;Lost with a map — turn a map round and round and give up;Stick figures — twig shapes hanging from branches;Something outside the tent — freeze, listen, and zip the door|",
+"I Know What You Did Last Summer|the note under the door;the fisherman with the hook;the beauty queen on the parade float;the body in the boot|Fisherman,Hook,Julie,Note,Summer,Helen,Barry,Parade,Boot,Ice|Read the note — open a letter and go white;The hook — a raincoat, a gaff hook, and a slow walk;Dump the body — four teenagers arguing over a boot in the dark;Beauty queen in a crown — wave from a float, then run through an alley;Look at the calendar — realise exactly one year has passed|",
+"The Craft|the four girls at Catholic school doing magic;'light as a feather, stiff as a board';the snakes in the room;the bus driver line about watching out for the weirdos|Witches,Nancy,Sarah,Bonnie,Rochelle,Feather,Circle,Spell,Snakes,Coven|Light as a feather — lift someone off the floor with two fingers each;The circle — four girls in a chalk circle calling the corners;Hair falls out — run your fingers through your hair and stare at the handful;Walk on water — step off a cliff and stand on the sea;Butterflies everywhere — the whole room fills and you smile wrong|Theme: 'How Soon Is Now' — the Smiths song covered for the trailer, all shimmer and reverb.",
+"Tremors|the worms under the desert town;'run for the rocks';the survivalist couple and their basement of guns;pole vaulting over the sand|Worms,Graboids,Valentine,Earl,Perfection,Desert,Burt,Rocks,Polevault,Underground|Don't touch the ground — hop between boulders and car roofs;Pole vault — sprint, plant a pole and sail over open sand;The gun basement — pull back a wall to reveal an armoury and shrug;Something under the sand — watch a ripple move fast towards you;Ear to the ground — listen, then scream at everyone to move|"
+];
+
+const HINT_RAW5F=[
+"10 Things I Hate About You|the poem read out in class;the serenade on the school field with a marching band;the paintball date;the rule that the younger sister can't date until the older one does|Kat,Patrick,Bianca,Padua,Poem,Serenade,Paintball,Shakespeare,Prom,Sister|Serenade from the stands — sing a Frankie Valli song into a stadium mic and get chased;The poem — read something out in class and break down halfway;Paintball date — shoot each other and roll down a hill;Table dance — climb on a bar table and dance to distract a teacher;Refuse to be charmed — scowl through someone being extremely charming|Theme: 'Can't Take My Eyes Off You' — the one sung on the bleachers with the school band joining in.",
+"She's All That|the bet that he can make anyone prom queen;the girl with the glasses and the ponytail;the prom dance routine everybody suddenly knows;the falafel hat|Zack,Laney,Bet,Prom,Makeover,Glasses,Falafel,Dean,Queen,Art|Take off the glasses — remove specs, shake out a ponytail, walk down stairs;The bet — shake hands on something you will regret;Synchronised prom dance — an entire year group doing the same routine;Performance art — take an audience through something deeply weird;Hacky sack — kick a small bag around badly while trying to be cool|Theme: 'Kiss Me' by Sixpence None the Richer — the one over the staircase moment.",
+"Cruel Intentions|the bet over the diary;the two step-siblings playing games with people;the cross necklace;the kiss in the park|Sebastian,Kathryn,Annette,Diary,Bet,Cross,Manhattan,Cecile,Jaguar,Wager|The wager — offer something shocking as a prize and mean it;Cocaine cross — flip open a crucifix necklace;The diary — write everything down and leave it where it will be found;Vintage Jaguar — drive through Manhattan looking insufferable;Read the journal at the funeral — hand out photocopies|Theme: 'Bittersweet Symphony' — the Verve string loop over the final walk.",
+"Romeo + Juliet|the guns named Sword and Dagger;the petrol station shootout;the fish tank;the Hawaiian shirts on Verona Beach|Verona,Montague,Capulet,Fishtank,Guns,Balcony,Beach,Mercutio,Hawaiian,Poison|Look through the fish tank — lock eyes with someone through glass and fish;Guns not swords — draw a pistol engraved with the word 'sword';The pool instead of a balcony — fall into water mid-declaration;Drag queen Mercutio — a white suit and a huge performance at a party;Take the vial — drink and collapse in a church full of candles|Theme: 'Kissing You' — the slow piano ballad at the party. Also 'Lovefool' by the Cardigans.",
+"Stand by Me|four boys walking the railway to find a body;the bridge and the train;the pie-eating contest story;'I never had any friends later on like the ones I had when I was twelve'|Boys,Railway,Body,Gordie,Chris,Teddy,Vern,Bridge,Leeches,Pie|Walk the tracks — four boys single file on a railway line;The train on the bridge — run, throw yourself flat, and feel it pass;The leeches — strip off in a swamp and find them everywhere;Campfire story — tell a disgusting story to three rapt listeners;Barf-o-rama — mime a pie-eating contest going catastrophically wrong|Theme: 'Stand by Me' — the Ben E. King song, the whole title.",
+"Say Anything|the boombox held over his head;the kickboxer with no plan;'I gave her my heart, she gave me a pen';the valedictorian's father|Lloyd,Diane,Boombox,Kickboxing,Pen,Dobler,Graduation,Ping,Plane,Stereo|The boombox — stand outside a window holding a stereo overhead;I gave her a pen — hold up a biro and be genuinely wounded;Kickboxing career plan — explain your future with total sincerity and no plan;Broken glass in the car park — carry someone over glass in bare feet;Wait for the ding — grip an armrest on a plane waiting for a sound|Theme: 'In Your Eyes' by Peter Gabriel — the boombox song.",
+"Pretty in Pink|the homemade prom dress;the record shop girl;the boy in the thrift-store hat dancing;'blane? that's not a name, that's a major appliance'|Andie,Duckie,Blane,Prom,Dress,Record,Pink,Thriftstore,Hat,Richie|Homemade dress — cut up two dresses and sew them into one;Duckie's dance — pork-pie hat, gloves, and a full lip-sync on a shop counter;Rich kids vs poor kids — two crowds in a school corridor sizing each other up;The pink dress reveal — walk into a prom alone and hold your head up;Record shop — flip through vinyl and have a strong opinion|Theme: 'If You Leave' by OMD — the prom song. Also 'Try a Little Tenderness' for the shop dance.",
+"Good Will Hunting|the janitor solving the maths problem on the corridor blackboard;'it's not your fault';the bar scene about the library card;'how do you like them apples'|Will,Hunting,Sean,Janitor,MIT,Maths,Therapist,Southie,Apples,Chalkboard|Solve it on the board — scribble a proof on a corridor blackboard and walk off;It's not your fault — say it over and over until someone breaks;The bar takedown — dismantle a smug student and mention a library card;How do you like them apples — press a phone number to a window;The park bench — talk quietly about the Sistine Chapel and losing someone|",
+"Sleepless in Seattle|the widower's son phoning a radio show;the meeting at the top of the Empire State Building;the woman who flies across the country to look at a stranger;the Affair to Remember crying|Seattle,Sam,Annie,Radio,Empire,State,Jonah,Baltimore,Letter,Valentine|Radio phone-in — a small boy calling a show about his dad;Cry at an old film — sob uncontrollably at a black and white movie;Write the letter — draft it, screw it up, and send it anyway;Top of the building — wait on an observation deck at closing time;The backpack left behind — spot a bag and realise who it belongs to|",
+"My Best Friend's Wedding|the pact that they'd marry at 28;the karaoke disaster;the restaurant singalong;the gay best friend's speech|Julianne,Michael,Kimmy,Pact,Karaoke,Wedding,George,Chicago,Toast,Bridesmaid|Restaurant singalong — start a song at one table and have a whole room join;Karaoke disaster — sing so badly that everybody loves you for it;Sabotage the wedding — smile warmly while planning something appalling;The pretend fiancé — introduce someone as your partner and watch them improvise;Dance at the end with the wrong person|Theme: 'I Say a Little Prayer' — the one that spreads around the whole restaurant.",
+"Homeward Bound|three pets crossing the wilderness home;the old dog falling in the mud pit;the cat's sarcastic narration;'I'm not lost, I'm just… investigating'|Shadow,Chance,Sassy,Dog,Cat,Wilderness,Home,Porcupine,River,Journey|Old dog in the pit — struggle up a muddy slope and almost not make it;Sarcastic cat — stalk past commenting witheringly on everything;Porcupine face — sniff something and come away full of quills;Cross the river — get swept downstream and hauled out;Come over the hill — arrive home late, limping, to a screaming family|",
+"Fly Away Home|the girl raising orphaned geese;the ultralight aircraft leading the flock;teaching birds to migrate;the father who builds strange machines|Geese,Amy,Ultralight,Migration,Goslings,Father,Flock,Wings,Barn,Canada|Imprinted geese — walk anywhere and have a line of birds follow;Ultralight take-off — a tiny aircraft with a goose-shaped nose lifting off;Hatch in a drawer — find eggs and keep them warm in a barn;Lead the flock — fly looking back over your shoulder counting birds;Land in a field of strangers — touch down to a waiting crowd|",
+"Newsies|the newspaper boys going on strike;'carrying the banner';the dance number in the street;the boy who wants to go to Santa Fe|Newsies,Jack,Strike,Papers,Manhattan,Pulitzer,SantaFe,Davey,Crutchie,Banner|Sell the papers — shout a headline on a corner and improve the truth;Street dance — a huge tap and leap number in braces and a cap;Go on strike — tear up a stack of papers and throw them in the air;The boy with the crutch — hop along keeping up with everyone;Sing about Santa Fe on a rooftop|Theme: 'Seize the Day' — the big marching strike anthem. Also 'Carrying the Banner'.",
+"That Thing You Do!|the band with one hit song;the drummer who speeds the song up;hearing yourself on the radio for the first time;'I am Spartacus'|Wonders,Oneders,Guy,Drummer,Song,Radio,Erie,Playtone,Hit,Band|Hear it on the radio — sprint through a shop screaming to turn it up;Speed the song up — drum faster than agreed and change everything;Spell the band name — explain the apostrophe to a confused promoter;Play the same song again — perform your only hit for the fortieth time;Sunglasses on the plane — a band pretending to be much cooler than they are|Theme: 'That Thing You Do!' — the impossibly catchy one-hit-wonder song. Once heard, never removed.",
+"Almost Famous|the teenage journalist on tour;'I am a golden god';the Tiny Dancer singalong on the bus;'it's all happening'|Rollingstone,William,Penny,Lane,Russell,Stillwater,Bus,Goldengod,Tour,Bandaid|Tiny Dancer on the bus — a whole coach slowly joining in one by one;Golden god — stand on a roof at a party and announce it before jumping;Interview the band — hold a tape recorder and be ignored;The band-aid — a girl in a fur coat calling herself something other than a groupie;Mum on the phone — 'don't take drugs' shouted down a payphone|Theme: 'Tiny Dancer' — the Elton John singalong on the tour bus. Also 'America' by Simon & Garfunkel.",
+"The Muppet Christmas Carol|the frog as Bob Cratchit;the narrator rat and the narrator storyteller;the ghosts visiting the miser;'light the lamp, not the rat'|Scrooge,Cratchit,Kermit,Gonzo,Rizzo,Ghosts,Tiny,Tim,Marley,Christmas|Narrate with a rat — tell a story with a small heckler at your elbow;Two chained bookkeepers — the ghosts of business past, heckling from a window;The miser softens — stomp about hating everyone, then buy the biggest turkey;Tiny Tim on a shoulder — a small frog with a crutch on a bigger frog;Vegetables that sing — a market stall where the produce harmonises|Theme: 'It Feels Like Christmas' — the Ghost of Christmas Present's big number. Also 'One More Sleep 'Til Christmas'.",
+"Spice World|the girl band on a double decker bus;the five nicknames;'girl power';the photo shoot montage|Spice,Girls,Bus,Girlpower,Union,Jack,Platforms,Tour,Peace,Wannabe|Five distinct poses — cycle through five very different personalities;Union Jack dress — vamp in a flag dress on enormous platforms;Double decker — a bus painted like a flag doing a jump;Girl power — throw up a peace sign and shout it;Photo shoot — change outfit every two seconds mid-pose|Theme: 'Wannabe' — the 'zig-a-zig-ah' one. Also 'Spice Up Your Life'."
+];
+
+[HINT_RAW5,HINT_RAW5B,HINT_RAW5C,HINT_RAW5D,HINT_RAW5E,HINT_RAW5F].flat().forEach(r=>{
+  const [t,q,w,a,h]=r.split("|");
+  HINTS[t]={q:q.split(";"),w:w.split(","),a:a.split(";").map(x=>{const i=x.indexOf(" — ");return i>0?{n:x.slice(0,i),d:x.slice(i+3)}:{n:x,d:""}}),h};
+});
+
+EMOJI.push(
+// animation
+{e:"🦕🌿⭐👣",a:"The Land Before Time"},{e:"🐭🇷🇺🗽⭐",a:"An American Tail"},
+{e:"🐭🌹🏠🦉",a:"The Secret of NIMH"},{e:"🐕😇⏱️🎰",a:"All Dogs Go to Heaven"},
+{e:"🐜🌾🎪🐦",a:"A Bug's Life"},{e:"🤠🐴🪢🏪",a:"Toy Story 2"},
+{e:"🐜😰👑🔍",a:"Antz"},{e:"🔥🌿🌊👶🧺",a:"The Prince of Egypt"},
+{e:"🪙🏆🐴💰",a:"The Road to El Dorado"},{e:"👑🎵🦇❄️",a:"Anastasia"},
+{e:"🐺🛷💉❄️",a:"Balto"},{e:"🧚🌴🪓💨",a:"FernGully"},
+{e:"🦢🌙🐸🏹",a:"The Swan Princess"},{e:"👶🚼🛒🐵",a:"The Rugrats Movie"},
+{e:"⚡🐭🧬⚔️",a:"Pokémon: The First Movie"},{e:"🍑🦗🕷️🌊",a:"James and the Giant Peach"},
+{e:"🐶👦🎤🎣",a:"A Goofy Movie"},
+// comedy
+{e:"🦆🏒🅥⛸️",a:"The Mighty Ducks"},{e:"🇯🇲🛷❄️🥚",a:"Cool Runnings"},
+{e:"🐶🐶💦🏠",a:"Beethoven"},{e:"💰🎢🏔️👦",a:"Richie Rich"},
+{e:"🎄🦸🛍️😤",a:"Jingle All the Way"},{e:"🎅🧝🦌📇",a:"The Santa Clause"},
+{e:"🟢🫠🏀🤖",a:"Flubber"},{e:"🌴🐘🌳💥",a:"George of the Jungle"},
+{e:"😇⚾🙌🏟️",a:"Angels in the Outfield"},{e:"🏎️👦🚫👧",a:"The Little Rascals"},
+{e:"🔬👦🐜🌱",a:"Honey, I Shrunk the Kids"},{e:"🐰🕵️🎨💃",a:"Who Framed Roger Rabbit"},
+{e:"🎸📺🚗🤘",a:"Wayne's World"},{e:"📞🎸⏳🎓",a:"Bill & Ted's Excellent Adventure"},
+{e:"💇🎣🐕🤵",a:"There's Something About Mary"},{e:"🎤💒🎹💍",a:"The Wedding Singer"},
+{e:"🥧🏫🎺🎓",a:"American Pie"},{e:"🖨️📎😐🔥",a:"Office Space"},
+{e:"🎳🥤🧶🕶️",a:"The Big Lebowski"},{e:"🚗🏫🌿🏈",a:"Dazed and Confused"},
+{e:"💿🏪✊🎸",a:"Empire Records"},{e:"📣🤸👯🏆",a:"Bring It On"},
+// sci-fi & fantasy
+{e:"🔮👶🦉🌽",a:"Labyrinth"},{e:"📖🐉🐴🌌",a:"The NeverEnding Story"},
+{e:"💎🦅🧙🌑",a:"The Dark Crystal"},{e:"👶🗡️🧙🐷",a:"Willow"},
+{e:"🛸👦⏳🤖",a:"Flight of the Navigator"},{e:"🤖5️⃣📚⚡",a:"Short Circuit"},
+{e:"🧚🪝👦🍽️",a:"Hook"},{e:"🚕🔵🎤🧡",a:"The Fifth Element"},
+{e:"🔴🪐🧠🎫",a:"Total Recall"},{e:"🐛🚀🪖📺",a:"Starship Troopers"},
+// action
+{e:"🤖🏍️👍🌋",a:"Terminator 2: Judgment Day"},{e:"✈️🐰⛓️💇",a:"Con Air"},
+{e:"🎭🔫🕊️⛪",a:"Face/Off"},{e:"🏝️🔬💚🚁",a:"The Rock"},
+{e:"☄️🛢️🚀👨‍👧",a:"Armageddon"},{e:"🕵️💃🐴🛩️",a:"True Lies"},
+{e:"🏄🎭🏦🪂",a:"Point Break"},{e:"🌊⛵🫁🗺️",a:"Waterworld"},
+// scary
+{e:"🧹🕯️🐈‍⬛3️⃣",a:"Hocus Pocus"},{e:"👻👦🏚️💃",a:"Casper"},
+{e:"🫰🫰🖐️🖤",a:"The Addams Family"},{e:"🧙👃🐭🦶",a:"The Witches"},
+{e:"🎁💦🌙🍔",a:"Gremlins"},{e:"🧛🏖️🏍️🎷",a:"The Lost Boys"},
+{e:"🧤🔪😴🎩",a:"A Nightmare on Elm Street"},{e:"🧸🔪🔋👦",a:"Child's Play"},
+{e:"📹🌲🪵😢",a:"The Blair Witch Project"},{e:"🪝🧥🚗👑",a:"I Know What You Did Last Summer"},
+{e:"🪶4️⃣🕯️🐍",a:"The Craft"},{e:"🪱🏜️🪨🏚️",a:"Tremors"},
+// romance & drama
+{e:"📝🎺🏟️😭",a:"10 Things I Hate About You"},{e:"👓➡️💃🎓",a:"She's All That"},
+{e:"📔✝️🚗🎻",a:"Cruel Intentions"},{e:"🐠🔫🌴⚔️",a:"Romeo + Juliet"},
+{e:"🚂🛤️4️⃣🥧",a:"Stand by Me"},{e:"📻🙌🥊🖊️",a:"Say Anything"},
+{e:"👗🎀💿🎩",a:"Pretty in Pink"},{e:"🧹🔢🍎🛋️",a:"Good Will Hunting"},
+{e:"📻🏙️💌🌃",a:"Sleepless in Seattle"},{e:"🎤💒🍽️🎶",a:"My Best Friend's Wedding"},
+{e:"🐕🐈🐕🏔️",a:"Homeward Bound"},{e:"🪿🛩️👧🍁",a:"Fly Away Home"},
+// musicals
+{e:"📰✊🕺🎩",a:"Newsies"},{e:"🥁📻1️⃣🎸",a:"That Thing You Do!"},
+{e:"🚌🎸📝🕶️",a:"Almost Famous"},{e:"5️⃣🚌✌️👠",a:"Spice World"},
+{e:"🐸🐀🎄👻",a:"The Muppet Christmas Carol"}
+);
+
+// New titles with music everyone can hum or sing.
+HUMMABLE.push(
+"The Land Before Time","An American Tail","The Prince of Egypt","Anastasia","A Goofy Movie",
+"Toy Story 2","The Road to El Dorado","Cool Runnings","George of the Jungle","Wayne's World",
+"The Wedding Singer","Dazed and Confused","Labyrinth","The NeverEnding Story","Hook",
+"Terminator 2: Judgment Day","Con Air","Armageddon","Hocus Pocus","Casper","The Addams Family",
+"The Lost Boys","A Nightmare on Elm Street","The Craft","10 Things I Hate About You","She's All That",
+"Cruel Intentions","Romeo + Juliet","Stand by Me","Say Anything","Pretty in Pink",
+"My Best Friend's Wedding","Newsies","That Thing You Do!","Almost Famous","Spice World",
+"The Muppet Christmas Carol"
+);
+
+Object.assign(SONG,{
+"The Land Before Time":"If We Hold On Together Diana Ross","An American Tail":"Somewhere Out There An American Tail",
+"The Prince of Egypt":"When You Believe Whitney Houston Mariah Carey","Anastasia":"Once Upon a December Anastasia",
+"A Goofy Movie":"Eye to Eye Powerline Goofy Movie","Toy Story 2":"When She Loved Me Sarah McLachlan",
+"The Road to El Dorado":"It's Tough to Be a God Elton John","Cool Runnings":"I Can See Clearly Now Jimmy Cliff",
+"George of the Jungle":"George of the Jungle Theme","Wayne's World":"Bohemian Rhapsody Queen",
+"The Wedding Singer":"Grow Old With You Adam Sandler","Dazed and Confused":"Slow Ride Foghat",
+"Labyrinth":"Magic Dance David Bowie","The NeverEnding Story":"Neverending Story Limahl",
+"Hook":"Hook Theme John Williams","Terminator 2: Judgment Day":"Terminator 2 Theme Brad Fiedel",
+"Con Air":"How Do I Live Trisha Yearwood","Armageddon":"I Don't Want to Miss a Thing Aerosmith",
+"Hocus Pocus":"I Put a Spell on You Bette Midler Hocus Pocus","Casper":"Remember Me This Way Jordan Hill",
+"The Addams Family":"Addams Family Theme","The Lost Boys":"Cry Little Sister Gerard McMann",
+"A Nightmare on Elm Street":"Nightmare on Elm Street Main Theme Charles Bernstein",
+"The Craft":"How Soon Is Now Love Spit Love","10 Things I Hate About You":"Can't Take My Eyes Off You Heath Ledger",
+"She's All That":"Kiss Me Sixpence None the Richer","Cruel Intentions":"Bitter Sweet Symphony The Verve",
+"Romeo + Juliet":"Kissing You Des'ree","Stand by Me":"Stand by Me Ben E King",
+"Say Anything":"In Your Eyes Peter Gabriel","Pretty in Pink":"If You Leave OMD",
+"My Best Friend's Wedding":"I Say a Little Prayer My Best Friend's Wedding",
+"Newsies":"Seize the Day Newsies","That Thing You Do!":"That Thing You Do The Wonders",
+"Almost Famous":"Tiny Dancer Elton John","Spice World":"Wannabe Spice Girls",
+"The Muppet Christmas Carol":"It Feels Like Christmas Muppet Christmas Carol"
+});
+
+TRIVIA.push(
+{q:"Two slackers host a public-access chat show from a basement and head-bang to Queen in a car.",a:"Wayne's World"},
+{q:"A Jamaican sprinter fails to qualify, so he builds a bobsled team for the Winter Olympics.",a:"Cool Runnings"},
+{q:"Three witches are resurrected on Halloween by a boy lighting a black candle.",a:"Hocus Pocus"},
+{q:"A boy wishes his baby brother away and has thirteen hours to cross a maze and get him back.",a:"Labyrinth"},
+{q:"A teenager stands outside a bedroom window holding a stereo over his head.",a:"Say Anything"},
+{q:"Four boys walk along a railway line for two days to find a dead body.",a:"Stand by Me"},
+{q:"A man is paid to make the most unpopular girl in school into prom queen.",a:"She's All That"},
+{q:"An orphaned dinosaur and his friends cross a wasteland to find a green valley.",a:"The Land Before Time"},
+{q:"A boy is told three rules about his Christmas pet, and breaks all of them.",a:"Gremlins"},
+{q:"An office worker stops caring, and his bosses promote him for it.",a:"Office Space"},
+{q:"Oil drillers are trained as astronauts to blow up an asteroid heading for Earth.",a:"Armageddon"},
+{q:"A dad spends Christmas Eve hunting the last superhero action figure in the city.",a:"Jingle All the Way"},
+{q:"A cop and a terrorist have each other's faces surgically swapped.",a:"Face/Off"},
+{q:"A band of newspaper boys go on strike against the publishers of New York.",a:"Newsies"},
+{q:"A teenage reporter goes on tour with a rock band and the bus sings Elton John.",a:"Almost Famous"},
+{q:"A girl's homemade prom dress is made from two dresses, and her friend dances in a pork-pie hat.",a:"Pretty in Pink"},
+{q:"A janitor at MIT turns out to be a mathematical genius and gets a therapist.",a:"Good Will Hunting"},
+{q:"A dog, a cat and another dog walk home across the American wilderness.",a:"Homeward Bound"},
+{q:"A boy's father becomes Santa after the previous one falls off their roof.",a:"The Santa Clause"},
+{q:"Three film students go into the woods with a camera and do not come out.",a:"The Blair Witch Project"}
+);
+
+HUMMABLE.forEach(t=>HUMSET.add(t));
+
 /* ============ TUNING ============ */
 // A shelf needs at least this many titles before it is offered as a genre,
 // and pool() uses the same number before it falls back to the whole library.
@@ -952,8 +1350,82 @@ const GCOL={A:"--lime",C:"--orange",X:"--sticker",R:"--neon",S:"--purple",F:"--t
 const GAMES=[
  {id:"tapes", n:"Tape Race",  d:"Shot-clock face-offs, then charades from a genre shelf. Collect the tapes."},
  {id:"emoji", n:"Emoji Plots",d:"A movie as emoji. Slam your buzzer and say the title. No steals — next card either way."},
- {id:"trivia",n:"Plot Twist", d:"A plot in plain words. Same buzzers, same rules."}
+ {id:"trivia",n:"Plot Twist", d:"A plot in plain words. Same buzzers, same rules."},
+ {id:"years", n:"Which Came First?",d:"Two films, one buzzer each. Say which one hit the shelves first. The app knows — no arguing."}
 ];
+const gameById=id=>GAMES.find(g=>g.id===id)||GAMES[0];
+
+// Which slice of the library is in play.
+const ERAS={
+  "":     {n:"Any era",  lo:0,    hi:9999, d:""},
+  vhs:    {n:"VHS era",  lo:1980, hi:1999, d:"1980–1999 only — the rental-shop years."},
+  modern: {n:"2000s on", lo:2000, hi:9999, d:"2000 onwards only."}
+};
+
+// Two films are only a fair "which came first?" if they are far enough apart
+// that nobody is guessing on a technicality.
+const YEAR_GAP=4;
+
+/* ============ CLUE TYPES ============ */
+// Each type names the hint field it draws on (q = moments, w = words,
+// a = acting ideas, h = the music note), so a new type is a framing on
+// material the deck already carries rather than 255 more rows of content.
+// `wt` is how often it comes up; `retro` ones ride the Rewind Mode toggle.
+const CLUES=[
+ {k:"Act it out",c:"", uses:"a",wt:3,
+  r:"No talking, no sounds, no pointing at objects in the room.",
+  h:"Ways to act it — pick one or chain a few",
+  tip:"No talking, no sounds, no pointing at things in the room. Props are fine. Every idea here works whether or not you've seen the film."},
+ {k:"Play a scene",c:"q",uses:"q",wt:2,
+  r:"Talk your way through one of these moments. Haven't seen it? Make the lines up — play the character, not the script. Never say a word from the title.",
+  h:"Moments to play — pick one and talk",
+  tip:"Anything in quote marks is the real line. The rest are scenes — improvise the dialogue, do the voice, do the accent. If you've never seen it, play the situation and let them guess from that."},
+ {k:"One word",c:"w",uses:"w",wt:2,
+  r:"One single word, then silence. Say it in the character's accent or voice if that helps.",
+  h:"Words to try — pick one",
+  tip:"You can say your word in the character's accent or voice. One word, then nothing — no repeats, no sounds after."},
+ {k:"Hum it",c:"h",uses:"h",wt:2,
+  r:"Hum or sing the music. No words at all.",
+  h:"What to hum",
+  tip:"Hum, whistle or la-la it. No words, no title."},
+ {k:"Trailer voice",c:"t",uses:"q",wt:1,retro:1,
+  r:"Narrate it as the movie-trailer guy. Start with \"In a world…\", go enormous, and never say a word from the title.",
+  h:"Beats to narrate — string two or three together",
+  tip:"Deep voice. Short sentences. Long pauses. \"One man. One summer. One chance.\" You are allowed to be ridiculous — that is the whole point."},
+ {k:"Video store clerk",c:"b",uses:"a",wt:1,retro:1,
+  r:"Sell it to a customer who's already standing at the counter. Describe what they'll see. No title words, no actor names.",
+  h:"Things you'd tell them about — pick one or two",
+  tip:"You're behind the counter on a Friday night and this is your favourite film in the shop. Be pushy. \"Trust me. If you don't like it, bring it back.\""},
+ {k:"Back of the box",c:"b",uses:"q",wt:1,retro:1,
+  r:"Read it out like the blurb on the back of the case. Present tense, breathless, and end on a question.",
+  h:"Plot beats for your blurb",
+  tip:"\"When a young…\" \"But nothing can prepare them for…\" Finish on a cliffhanger question and then say nothing else."},
+ {k:"Away message",c:"t",uses:"w",wt:1,retro:1,
+  r:"One line, as a 2003 instant-messenger status. Moody. You may use exactly one of these words.",
+  h:"Words you're allowed to use — pick one",
+  tip:"Think song lyric, think brackets, think far too much feeling. \"~*~ gone to the island, don't wait up ~*~\". One line only, then go idle."}
+];
+
+/* ---- extra flavour the rental-shop generation will recognise ---- */
+DARES.push(
+"In the voice of the movie-trailer guy.","As a Blockbuster clerk on his last shift.",
+"Like your mum needs the landline back.","While rewinding an invisible tape the whole time.",
+"As a Windows 95 error message.","Like the batteries are going in your Walkman.",
+"With the enthusiasm of a Saturday morning cartoon advert.","As if you're on a Nokia with one bar.",
+"Like you're explaining it to someone at a sleepover at 2am.","In the style of a school assembly.",
+"As a dial-up connection.","Like the tape keeps chewing halfway through."
+);
+FACEOFFS.push(
+"Name a movie you definitely rented on VHS","Name a movie you watched at a sleepover",
+"Name a movie your school put on the TV trolley","Name a movie with a needle-drop you know by heart",
+"Name a movie with a shopping-mall scene","Name a movie with a payphone in it",
+"Name a movie with a montage set to a pop song","Name a movie you owned on DVD",
+"Name a movie your older sibling wouldn't let you watch","Name a movie with a dial-up or a computer scene",
+"Name a movie with a talent show or a big performance at the end",
+"Name a movie with a bully who gets what's coming","Name a movie set at summer camp",
+"Name a movie with a dog on the poster","Name a movie that had a cereal tie-in",
+"Name a movie with a crush who doesn't notice you","Name a movie with a slow clap"
+);
 
 /* ============ STATE ============ */
 const S={
@@ -961,9 +1433,11 @@ const S={
   names:["Player 1","Player 2","Player 3","Player 4"], mi:[0,0],
   // settings (the LEN preset below fills in target/secs/shot/race/buzz)
   len:"standard", comeback:1, freeswap:0, family:0, hum:1, sound:1,
-  booze:1, lightning:1, mystery:1, dares:1, music:0,
+  booze:1, lightning:1, mystery:1, dares:1, music:0, era:"", retro:1, third:"trivia",
+  // late fees — one shot each. Auto-added for a lost game, and addable by hand.
+  fees:[0,0],
   // the night
-  night:{on:0,g:0,wins:[0,0],shots:[0,0],won:[],correct:[0,0]}, game:"tapes",
+  night:{on:0,g:0,wins:[0,0],won:[],correct:[0,0],lineup:["tapes","emoji","trivia"]}, game:"tapes",
   // tape race
   sc:[0,0], tapes:[[],[]], round:0, genre:null, lt:null,
   faceoff:"", foRule:"", foTurn:0, foLeft:0, foTimer:null, foEnd:0,
@@ -981,7 +1455,7 @@ Object.entries(LEN.standard).forEach(([k,v])=>{if(k!=="n")S[k]=v});
 
 /* ---- settings that survive a reload ---- */
 const SAVE_KEYS=["len","n","names","target","secs","shot","race","buzz","comeback","freeswap",
-  "family","hum","sound","booze","lightning","mystery","dares","music","qgenre"];
+  "family","hum","sound","booze","lightning","mystery","dares","music","qgenre","era","retro","third"];
 function saveSettings(){
   try{
     const out={};SAVE_KEYS.forEach(k=>out[k]=S[k]);
@@ -1001,6 +1475,8 @@ function loadSettings(){
     });
     S.n=Math.min(4,Math.max(2,Math.round(S.n)));
     S.target=Math.min(3,Math.max(2,Math.round(S.target)));
+    if(!ERAS[S.era])S.era="";
+    if(S.third!=="trivia"&&S.third!=="years")S.third="trivia";
   }catch(e){}
 }
 
@@ -1026,21 +1502,19 @@ function emojiCells(str){
 }
 
 function hintBlock(){
-  const h=HINTS[S.cur.t]||{q:[],w:[],a:[],h:""},c=S.clue.c;
-  if(c==="q")return `<div class="hints"><p class="h">Moments to play — pick one and talk</p><ul>${h.q.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
-    <p class="tip">Anything in quote marks is the real line. The rest are scenes — improvise the dialogue, do the voice, do the accent. If you've never seen it, play the situation and let them guess from that.</p></div>`;
-  if(c==="w")return `<div class="hints"><p class="h">Words to try — pick one</p><div class="words">${h.w.map(x=>`<span>${esc(x)}</span>`).join("")}</div>
-    <p class="tip">You can say your word in the character's accent or voice. One word, then nothing — no repeats, no sounds after.</p></div>`;
-  if(c==="h"){
-    const sq=SONG[S.cur.t];
-    return `<div class="hints"><p class="h">${S.music&&sq?"Play it":"What to hum"}</p>
+  const h=HINTS[S.cur.t]||{q:[],w:[],a:[],h:""},cl=S.clue;
+  const wrap=(head,body,tip)=>`<div class="hints"><p class="h">${esc(head)}</p>${body}<p class="tip">${tip}</p></div>`;
+  if(cl.uses==="q")return wrap(cl.h,`<ul>${h.q.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`,esc(cl.tip));
+  if(cl.uses==="w")return wrap(cl.h,`<div class="words">${h.w.map(x=>`<span>${esc(x)}</span>`).join("")}</div>`,esc(cl.tip));
+  if(cl.uses==="h"){
+    const sq=SONG[S.cur.t],play=S.music&&sq;
+    return `<div class="hints"><p class="h">${play?"Play it":esc(cl.h)}</p>
       <p class="humtxt">${esc(h.h||"The main theme, or its biggest song.")}</p>
-      ${S.music&&sq?`<a class="btn spot" href="https://open.spotify.com/search/${encodeURIComponent(sq)}" target="_blank" rel="noopener">&#9834; Open in Spotify</a>
+      ${play?`<a class="btn spot" href="https://open.spotify.com/search/${encodeURIComponent(sq)}" target="_blank" rel="noopener">&#9834; Open in Spotify</a>
         <p class="tip">Spotify opens in its own app — hit play, then turn the screen away, because the track name gives it away. Your clock pauses while you're out and picks up when you come back.</p>`
-      :`<p class="tip">Hum, whistle or la-la it. No words, no title.</p>`}</div>`;
+      :`<p class="tip">${esc(cl.tip)}</p>`}</div>`;
   }
-  return `<div class="hints"><p class="h">Ways to act it — pick one or chain a few</p><ul class="acts">${h.a.map(x=>`<li><b>${esc(x.n)}</b>${x.d?` — ${esc(x.d)}`:``}</li>`).join("")}</ul>
-    <p class="tip">No talking, no sounds, no pointing at things in the room. Props are fine. Every idea here works whether or not you've seen the film.</p></div>`;
+  return wrap(cl.h,`<ul class="acts">${h.a.map(x=>`<li><b>${esc(x.n)}</b>${x.d?` — ${esc(x.d)}`:``}</li>`).join("")}</ul>`,esc(cl.tip));
 }
 
 function estMins(nightWide){
@@ -1061,16 +1535,57 @@ function tone(hz,ms,type="square",vol=.06,when=0){
     o.connect(g);g.connect(S.ac.destination);o.start(t);o.stop(t+ms/1000);
   }catch(e){}
 }
+// A frequency ramp — the backbone of every tape noise below.
+function sweep(from,to,ms,type="sawtooth",vol=.07,when=0){
+  if(!S.sound||!S.ac)return;
+  try{
+    if(S.ac.state==="suspended")S.ac.resume();
+    const o=S.ac.createOscillator(),g=S.ac.createGain(),t=S.ac.currentTime+when;
+    o.type=type;o.frequency.setValueAtTime(from,t);o.frequency.exponentialRampToValueAtTime(Math.max(1,to),t+ms/1000);
+    g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+ms/1000);
+    o.connect(g);g.connect(S.ac.destination);o.start(t);o.stop(t+ms/1000);
+  }catch(e){}
+}
+// Band-limited white noise: tape hiss, tracking static, the head hitting the drum.
+function noise(ms,freq=1800,q=1,vol=.05,when=0){
+  if(!S.sound||!S.ac)return;
+  try{
+    if(S.ac.state==="suspended")S.ac.resume();
+    const t=S.ac.currentTime+when,len=Math.max(1,(S.ac.sampleRate*ms/1000)|0);
+    const buf=S.ac.createBuffer(1,len,S.ac.sampleRate),ch=buf.getChannelData(0);
+    for(let i=0;i<len;i++)ch[i]=Math.random()*2-1;
+    const src=S.ac.createBufferSource();src.buffer=buf;
+    const f=S.ac.createBiquadFilter();f.type="bandpass";f.frequency.value=freq;f.Q.value=q;
+    const g=S.ac.createGain();g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+ms/1000);
+    src.connect(f);f.connect(g);g.connect(S.ac.destination);src.start(t);src.stop(t+ms/1000);
+  }catch(e){}
+}
 const tick=()=>tone(1200,40,"square",.04);
 const ding=()=>{tone(880,80);tone(1320,160,"square",.06,.08)};
 const wrong=()=>{tone(220,180,"triangle",.07);tone(180,260,"triangle",.07,.15)};
 const buzzIn=i=>{const b=i?740:1046;tone(b,120,"square",.08);tone(b*1.5,180,"square",.08,.1)};
-const buzzer=()=>{tone(160,900,"sawtooth",.14);tone(120,900,"sawtooth",.14,.02);tone(80,900,"square",.1,.04)};
+const buzzer=()=>{tone(160,900,"sawtooth",.14);tone(120,900,"sawtooth",.14,.02);tone(80,900,"square",.1,.04);
+  noise(260,600,.7,.06)};
 const fanfare=()=>[523,659,784,1047,1319].forEach((h,i)=>tone(h,220,"triangle",.09,i*.11));
 const anthem=()=>{[392,523,659,784,659,784,1047].forEach((h,i)=>tone(h,i===6?900:220,"triangle",.1,i*.16));
   [196,262,330,392].forEach((h,i)=>tone(h,600,"sawtooth",.04,i*.32))};
 const vib=p=>{try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}};
 const calmMotion=()=>window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---- the tape deck ---- */
+// The whirr of a VHS spinning back to the start.
+const rewindSfx=()=>{sweep(280,2600,420,"sawtooth",.05);noise(420,3200,.6,.035)};
+// The clunk of a cassette dropping into the mechanism.
+const ejectSfx=()=>{noise(90,320,1.2,.09);tone(90,160,"square",.08,.05)};
+// Head noise when the picture tears.
+const trackingSfx=()=>noise(180,900,.5,.055);
+// The handshake. Every one of them knows this sound.
+const dialupSfx=()=>{
+  [[440,120,0],[620,120,.14],[980,90,.30]].forEach(([h,m,w])=>tone(h,m,"sine",.07,w));
+  sweep(1600,520,260,"sine",.05,.42);
+  noise(700,2400,.4,.05,.70);
+  noise(520,1100,.7,.045,1.36);
+};
 
 /* ---- stop the phone dimming mid-round ---- */
 async function keepAwake(){
@@ -1096,12 +1611,21 @@ document.addEventListener("visibilitychange",()=>{
 });
 
 /* ============ DECKS ============ */
-const FAM={},GOF={};MOVIES.forEach(m=>{FAM[m.t]=m.f;GOF[m.t]=m.g});
-const inPlay=m=>S.family?!!m.f:true;
+MOVIES.forEach(m=>{if(!m.y)m.y=YEARS[m.t]||0});
+const FAM={},GOF={},YOF={};MOVIES.forEach(m=>{FAM[m.t]=m.f;GOF[m.t]=m.g;YOF[m.t]=m.y});
+function inPlay(m){
+  if(S.family&&!m.f)return false;
+  const e=ERAS[S.era]||ERAS[""];
+  return m.y>=e.lo&&m.y<=e.hi;
+}
+// A buzzer card is only playable if its film is in the current slice.
+const cardInPlay=a=>{const m={t:a,f:FAM[a],y:YOF[a]};return YOF[a]!==undefined&&inPlay(m)};
 
 function pool(g){
   const shelf=MOVIES.filter(m=>inPlay(m)&&(!g||m.g===g));
-  return shelf.length>=MIN_SHELF?shelf:MOVIES.filter(inPlay);
+  if(shelf.length>=MIN_SHELF)return shelf;
+  const any=MOVIES.filter(inPlay);
+  return any.length>=MIN_SHELF?any:MOVIES.filter(m=>!S.family||m.f);
 }
 function availableGenres(){
   return Object.keys(GENRES).filter(g=>MOVIES.filter(m=>m.g===g&&inPlay(m)).length>=MIN_SHELF);
@@ -1115,11 +1639,19 @@ function nextMovie(){
     if(S.deck.length>1&&S.deck[0]===last)[S.deck[0],S.deck[1]]=[S.deck[1],S.deck[0]];
   }
   S.cur=S.deck[S.di++];
-  const canHum=S.hum&&HUMSET.has(S.cur.t)&&(!S.music||SONG[S.cur.t]);
-  S.clue=pick(canHum?CLUES:CLUES.filter(c=>c.c!=="h"));
+  S.clue=pickClue();
   S.special=null;S.dare=null;
   if(S.mystery&&Math.random()<.18)S.special=pick(SPECIALS);
   else if(S.dares&&Math.random()<.28)S.dare=pick(DARES);
+}
+// Weighted so charades stays the backbone and the retro framings are a
+// garnish rather than half the deck.
+function pickClue(){
+  const canHum=S.hum&&HUMSET.has(S.cur.t)&&(!S.music||SONG[S.cur.t]);
+  const opts=CLUES.filter(c=>(c.uses!=="h"||canHum)&&(!c.retro||S.retro));
+  let roll=Math.random()*opts.reduce((n,c)=>n+c.wt,0);
+  for(const c of opts){roll-=c.wt;if(roll<=0)return c}
+  return opts[0];
 }
 
 function snapshot(){return{cur:S.cur,clue:S.clue,special:S.special,dare:S.dare,score:S.score,streak:S.streak,
@@ -1148,15 +1680,32 @@ function overlay(html){$("#overlay").innerHTML=html}
 function nightBar(){
   if(!S.night.on)return "";
   const dots=[0,1,2].map(i=>`<b class="${S.night.won[i]!==undefined?'w'+S.night.won[i]:''}"></b>`).join("");
-  return `<div class="night">GAME ${S.night.g} · BEST OF 3 · ${GAMES[S.night.g-1].n.toUpperCase()} ${dots}</div>`;
+  return `<div class="night">GAME ${S.night.g} · BEST OF 3 · ${gameAt(S.night.g).n.toUpperCase()} ${dots}</div>`;
 }
 function scoreboard(sc,sub){
   const box=i=>`<div class="pl${i} ${sc[i]>sc[1-i]?'lead':''}">
     <div class="nm">${esc(S.p[i])}</div><div class="pt">${sc[i]}</div>
     ${sub?sub(i):``}
-    ${S.night.on?`<div class="sub">${plural(S.night.wins[i],"game")}${S.booze?` · ${plural(S.night.shots[i],"shot")}`:""}</div>`:``}</div>`;
+    ${S.night.on||S.booze?`<div class="sub">${S.night.on?plural(S.night.wins[i],"game"):""}${S.night.on&&S.booze?" · ":""}${S.booze?plural(S.fees[i],"fee"):""}</div>`:``}</div>`;
   return `<div class="score">${box(0)}${box(1)}</div>`;
 }
+
+/* ---- late fees: one fee = one shot. The game adds one for a lost game;
+   this panel is how the table adds the rest. Only shown between rounds. ---- */
+function feeBar(){
+  if(!S.booze)return "";
+  const side=i=>`<div class="fee">
+      <span class="who">${esc(S.p[i])}</span>
+      <span class="ctl">
+        <button data-unfee="${i}" ${S.fees[i]?"":"disabled"} aria-label="Remove a late fee from ${esc(S.p[i])}">−</button>
+        <b>${S.fees[i]}</b>
+        <button data-fee="${i}" aria-label="Add a late fee for ${esc(S.p[i])}">+</button>
+      </span>
+    </div>`;
+  return `<div class="fees"><p class="lbl">Late fees · one shot each</p>
+    <div class="feerow">${side(0)}${side(1)}</div></div>`;
+}
+const feeTotal=()=>S.fees[0]+S.fees[1];
 const tapeSub=i=>`<div class="tapes">${S.tapes[i].map(g=>`<span class="tp" style="border-left-color:var(${GCOL[g]})">${GENRES[g]}</span>`).join("")}</div>`;
 
 function clock(left,total,label,hold){
@@ -1188,7 +1737,8 @@ V.menu=()=>`
 <button class="spine sm" data-single="tapes"><span class="n">Tape Race</span></button>
 <button class="spine sm two" data-single="emoji"><span class="n">Emoji Plots</span></button>
 <button class="spine sm three" data-single="trivia"><span class="n">Plot Twist</span></button>
-<button class="spine sm four" data-go="quick"><span class="n">Just charades</span></button>
+<button class="spine sm four" data-single="years"><span class="n">Which Came First?</span></button>
+<button class="spine sm" data-go="quick"><span class="n">Just charades</span></button>
 <button class="btn ghost" data-go="rules">How to play</button>`;
 
 V.rules=()=>`
@@ -1203,9 +1753,13 @@ V.rules=()=>`
 <div class="card"><p class="mid">Game 2 · Emoji Plots</p>
   <p class="sub">A movie shows up as a row of emoji. Each of you has a buzzer. Slam it and the answer appears straight away —
   say what you were going to say, and the other player calls it. No steals: right or wrong, it's on to the next one. First to ${S.race}.</p></div>
-<div class="card"><p class="mid">Game 3 · Plot Twist</p>
-  <p class="sub">Same buzzers and the same rules, but the movie is described in plain words instead of pictures. First to ${S.race}.</p></div>
-${S.booze?`<div class="card red"><p class="mid">One rule on the shots</p><p class="sub">One per game lost, taken at the end of that game, not during. Water and food before anyone drives.</p></div>`:``}
+<div class="card"><p class="mid">Game 3 · Plot Twist <span style="font-weight:400">or</span> Which Came First?</p>
+  <p class="sub">Plot Twist is the same buzzers and the same rules, but the movie is described in plain words instead of pictures.
+  Which Came First? puts two films side by side — buzz in, pick the older one, and the app settles it. No judging, no arguing. Pick either in setup. First to ${S.race}.</p></div>
+<div class="card dark"><p class="mid">Rewind Mode</p>
+  <p class="sub">Leave it on and the clue cards mix in four more ways to give it away: narrate the trailer, sell it like a video-store clerk, read the back of the box, or post it as a 2003 away message. Straight charades is still the most common card.
+  There's also an era switch — set the shelf to 1980–1999 and the whole night comes out of the rental shop.</p></div>
+${S.booze?`<div class="card red"><p class="mid">Late fees</p><p class="sub">One shot for losing a game, taken at the end of that game, not during. Anyone can be charged an extra one at any point between rounds — there's a + button on every pause screen. The receipt at the end totals them up. Water and food before anyone drives.</p></div>`:``}
 <button class="btn no" data-go="menu">Back</button>`;
 
 V.setup=()=>`
@@ -1238,16 +1792,28 @@ ${(S.night.on||S.game!=="tapes")?`
 <div class="chips" data-set="race">${[5,7,10].map(n=>`<button data-v="${n}" aria-pressed="${S.race===n}">${n}</button>`).join("")}</div>
 <label>Buzzer clock</label>
 <div class="chips" data-set="buzz">${[10,15,20].map(n=>`<button data-v="${n}" aria-pressed="${S.buzz===n}">${n}s</button>`).join("")}</div>`:``}
+${S.night.on?`
+<label>Third game</label>
+<div class="chips" data-set="third">
+  <button data-v="trivia" aria-pressed="${S.third==="trivia"}">Plot Twist</button>
+  <button data-v="years" aria-pressed="${S.third==="years"}">Which Came First?</button>
+</div>`:``}
+<div class="sect">The shelf</div>
+<label>Which era are we raiding?</label>
+<div class="chips" data-set="era">${Object.keys(ERAS).map(k=>`<button data-v="${k}" aria-pressed="${S.era===k}">${ERAS[k].n}</button>`).join("")}</div>
+<p class="note" style="margin-top:8px">${ERAS[S.era].d?esc(ERAS[S.era].d)+" ":""}<b>${MOVIES.filter(inPlay).length}</b> films in play across <b>${plural(availableGenres().length,"shelf").replace("shelfs","shelves")}</b>.${
+  availableGenres().length<3&&(S.night.on||S.game==="tapes")?` <span style="color:var(--stub)">That's thin for the tape race — every round will pull from the same shelf. Loosen the era or turn off family-friendly for more variety.</span>`:""}</p>
 <div class="sect">Everything</div>
+<button class="tick" data-tog="retro" aria-pressed="${!!S.retro}"><b></b>Rewind Mode — trailer voice, video-store clerk, back of the box, away message</button>
 ${S.hum?`<button class="tick" data-tog="music" aria-pressed="${!!S.music}"><b></b>Play the song from Spotify instead of humming</button>`:``}
-<button class="tick" data-tog="booze" aria-pressed="${!!S.booze}"><b></b>Loser of each game takes a shot</button>
+<button class="tick" data-tog="booze" aria-pressed="${!!S.booze}"><b></b>Late fees — loser of each game owes a shot</button>
 <button class="tick" data-tog="family" aria-pressed="${!!S.family}"><b></b>Family-friendly movies only</button>
 <button class="tick" data-tog="sound" aria-pressed="${!!S.sound}"><b></b>Buzzer and sound effects</button>
 ${S.music?`<p class="note">Needs the Spotify app and a connection. It opens a search for the song — tap play, then keep the screen turned away, because the track name is the answer. Your clock pauses while you are in Spotify.</p>`:``}
 <button class="btn go" data-act="start">${S.night.on?"Start game 1":"Start"}</button>
 <button class="btn ghost" data-go="menu">Back</button>`;
 
-V.gameintro=()=>{const g=GAMES[S.night.g-1];return `
+V.gameintro=()=>{const g=gameAt(S.night.g);return `
 ${nightBar()}
 <div class="card dark">
   <p class="kicker" style="color:var(--dim)">Game ${S.night.g} of 3</p>
@@ -1255,6 +1821,7 @@ ${nightBar()}
   <p class="sub">${g.d}</p>
   ${S.night.g>1?`<p class="sub">Record so far: ${esc(S.p[0])} ${S.night.wins[0]} — ${S.night.wins[1]} ${esc(S.p[1])}.</p>`:``}
 </div>
+${feeBar()}
 <button class="btn go" data-act="begin">Start ${g.n}</button>`};
 
 /* ---- tape race screens ---- */
@@ -1267,6 +1834,7 @@ ${nightBar()}${scoreboard(S.sc,tapeSub)}
     <p class="sub">${S.lt?`Face-off about one ${GENRES[S.genre].toLowerCase()} movie, then clues from the same shelf.`:`Face-off first, then clues from this shelf.`} Winner takes the tape.</p></div>
   </div>
 </div>
+${feeBar()}
 <button class="btn go" data-act="faceoff">${esc(S.p[S.foTurn])} goes first — start the shot clock</button>
 ${quitBtn()}`;
 
@@ -1343,19 +1911,42 @@ ${nightBar()}${scoreboard(S.sc,tapeSub)}
   <p class="sub">${S.score} correct, needed ${S.need}.</p>
   ${gotList()}
 </div>
+${feeBar()}
 <button class="btn go" data-act="next">${tapesDone()?"Final score":"Next round"}</button>`;
 };
 
 /* ---- buzzer game screens ---- */
 V.buzz=()=>{
-  const z=S.bz,it=z.items[z.i],isE=S.game==="emoji";
-  const body=isE?emojiCells(it.e):`<p class="mid" style="font-size:1.25rem;line-height:1.35">${esc(it.q)}</p>`;
+  const z=S.bz,it=z.items[z.i],mode=S.game;
   const shown=z.st!=="live";
+  const kicker={emoji:"Emoji plot",trivia:"Plot twist",years:"Which came first?"}[mode];
+
+  let body,answer="";
+  if(mode==="emoji"){
+    body=emojiCells(it.e);
+    if(shown)answer=`<h2 class="big" style="margin-top:14px;color:#C8106A">${esc(it.a)}</h2>`;
+  }else if(mode==="trivia"){
+    body=`<p class="mid" style="font-size:1.25rem;line-height:1.35">${esc(it.q)}</p>`;
+    if(shown)answer=`<h2 class="big" style="margin-top:14px;color:#C8106A">${esc(it.a)}</h2>`;
+  }else{
+    const face=(m,i)=>`<div class="vs${shown&&it.a===i?" older":""}">
+        <span class="t">${esc(m.t)}</span>${shown?`<span class="y">${m.y}</span>`:`<span class="y">????</span>`}</div>`;
+    body=`<div class="versus">${face(it.pair[0],0)}<span class="or">vs</span>${face(it.pair[1],1)}</div>`;
+    if(shown)answer=`<p class="sub"><b>${esc(it.pair[it.a].t)}</b> came first — by ${Math.abs(it.pair[0].y-it.pair[1].y)} years.</p>`;
+  }
+
   let controls="";
   if(z.st==="live")controls=`<div class="dock"><div class="row">
       <button class="btn buzz p1 ${S.n>2?'long':''}" data-buzz="0">${esc(S.p[0])}<br>BUZZ</button>
       <button class="btn buzz p2 ${S.n>2?'long':''}" data-buzz="1">${esc(S.p[1])}<br>BUZZ</button></div>
       <p class="hint">Keyboard: 1 and 2</p></div>`;
+  else if(z.st==="pick")controls=`
+      <div class="card ${z.who?'neon':'gold'}"><p class="kicker" style="color:inherit;opacity:.75">${esc(S.p[z.who])} buzzed in</p>
+      <h2 class="big">Which one came first?</h2></div>
+      <div class="dock"><div class="row">
+        <button class="btn go" data-pick="0">${esc(it.pair[0].t)}</button>
+        <button class="btn go" data-pick="1">${esc(it.pair[1].t)}</button>
+      </div><p class="hint">Keyboard: 1 and 2</p></div>`;
   else if(z.st==="buzzed")controls=`
       <div class="card ${z.who?'neon':'gold'}"><p class="kicker" style="color:inherit;opacity:.75">${esc(S.p[z.who])} buzzed in</p>
       <h2 class="big">Did ${esc(S.p[z.who])} say it?</h2>
@@ -1365,23 +1956,25 @@ V.buzz=()=>{
         <button class="btn go" data-rule="1">Yes — point to ${esc(S.p[z.who])}</button>
       </div></div>`;
   else controls=`<div class="dock"><button class="btn go" data-act="bznext">${raceDone()?"Final score":"Next question"}</button></div>`;
+
+  const canHint=mode!=="years";
   return `
 ${nightBar()}${scoreboard(z.sc)}
 ${clock(z.st==="live"?z.left:0,S.buzz,z.st==="live"?"to buzz":"buzzed in",z.st!=="live")}
 <div class="card">
-  <p class="kicker">${isE?"Emoji plot":"Plot twist"} ${z.i+1}</p>
+  <p class="kicker">${kicker} ${z.i+1}</p>
   ${body}
-  ${shown?`<h2 class="big" style="margin-top:14px;color:#C8106A">${esc(it.a)}</h2>`:``}
+  ${answer}
   ${z.msg?`<p class="sub">${esc(z.msg)}</p>`:``}
-  ${z.st==="live"&&z.hint?`<p class="sub"><b>Shelf: ${GENRES[GOF[it.a]]||"Mixed"}</b></p>`:``}
+  ${z.st==="live"&&z.hint&&canHint?`<p class="sub"><b>Shelf: ${GENRES[GOF[it.a]]||"Mixed"}</b></p>`:``}
 </div>
-${z.st==="live"&&!z.hint?`<button class="btn ghost" data-act="ghint">Stuck? Show the genre</button>`:``}
+${z.st==="live"&&!z.hint&&canHint?`<button class="btn ghost" data-act="ghint">Stuck? Show the genre</button>`:``}
 ${controls}${quitBtn()}`;
 };
 
 /* ---- end-of-game screens ---- */
 V.gameover=()=>{
-  const w=S.gw,l=1-w,g=S.night.on?GAMES[S.night.g-1]:GAMES.find(x=>x.id===S.game),st=S.stats;
+  const w=S.gw,l=1-w,g=S.night.on?gameAt(S.night.g):gameById(S.game),st=S.stats;
   const last=S.night.on&&(S.night.g>=3||Math.max(...S.night.wins)>=2);
   return `
 ${nightBar()}
@@ -1396,24 +1989,46 @@ ${nightBar()}
     <tr><td>Passes</td><td>${st.passes[0]}</td><td>${st.passes[1]}</td></tr>
     <tr><td>Best streak</td><td>${st.best[0]}</td><td>${st.best[1]}</td></tr></table>`:``}
 </div>
-${S.booze?`<div class="card red"><h2 class="big">${esc(S.p[l])}, take your shot</h2><p class="sub">One for the loss. That's the whole rule.</p></div>`:``}
+${S.booze?`<div class="card red"><h2 class="big">Late fee: ${esc(S.p[l])}</h2>
+  <p class="sub">One shot for the loss — that's the whole rule. Anyone else earned one? Add it below.</p></div>`:``}
+${feeBar()}
 ${S.night.on?`<button class="btn go" data-act="nextgame">${last?"Winner's circle":`On to game ${S.night.g+1}`}</button>`
  :`<button class="btn go" data-act="again">Play again</button><button class="btn no" data-go="menu">Back to menu</button>`}`;
 };
 
 V.champion=()=>{
   const w=S.night.wins[0]>S.night.wins[1]?0:1,l=1-w;
+  const card=n=>String(n).padStart(4,"0");
   return `
 <div class="lights">
   <div class="w">Winner's circle</div>
   <div class="who">${esc(S.p[w])}</div>
   <div class="w">wins the night</div>
-  <div class="rec">${S.night.wins[w]} games to ${S.night.wins[l]} · ${S.night.won.map((x,i)=>`${GAMES[i].n}: ${esc(S.p[x])}`).join(" · ")}</div>
-  ${(S.night.correct[0]+S.night.correct[1])?`<div class="rec"><b style="color:var(--teal)">Most calls of the night: ${esc(S.p[S.night.correct[0]>=S.night.correct[1]?0:1])}</b> — ${Math.max(...S.night.correct)} to ${Math.min(...S.night.correct)}</div>`:``}
+  <div class="rec">${S.night.wins[w]} games to ${S.night.wins[l]}</div>
 </div>
-${S.booze?`<div class="card" style="margin-top:18px"><p class="mid">${esc(S.p[l])} took ${plural(S.night.shots[l],"shot")}${S.night.shots[w]?`, ${esc(S.p[w])} took ${S.night.shots[w]}`:""}.</p>
-<p class="sub">Winner picks the movie. Loser makes the popcorn. Nobody drives.</p></div>`
-:`<div class="card" style="margin-top:18px"><p class="mid">Winner picks the movie. Loser makes the popcorn.</p></div>`}
+
+<div class="memcard">
+  <div class="strip"></div>
+  <p class="co">Triple Feature · Member since tonight</p>
+  <p class="nm">${esc(S.p[w])}</p>
+  <p class="no">NO. ${card(1000+S.night.correct[0]+S.night.correct[1])} · GOOD FOR ONE FREE RENTAL</p>
+</div>
+
+<div class="receipt">
+  <p class="hd">★ TRIPLE FEATURE ★</p>
+  <p class="hd sm">thank you for rewinding</p>
+  <div class="ln"></div>
+  ${S.night.won.map((x,i)=>`<p class="li"><span>${esc(gameById(S.night.lineup[i]).n)}</span><span>${esc(S.p[x])}</span></p>`).join("")}
+  <div class="ln"></div>
+  ${(S.night.correct[0]+S.night.correct[1])?`<p class="li"><span>Most calls</span><span>${esc(S.p[S.night.correct[0]>=S.night.correct[1]?0:1])} · ${Math.max(...S.night.correct)}–${Math.min(...S.night.correct)}</span></p>`:``}
+  ${S.booze?`<p class="li"><span>Late fees · ${esc(S.p[0])}</span><span>${S.fees[0]}</span></p>
+  <p class="li"><span>Late fees · ${esc(S.p[1])}</span><span>${S.fees[1]}</span></p>
+  <div class="ln"></div>
+  <p class="li tot"><span>TOTAL DUE</span><span>${plural(feeTotal(),"shot")}</span></p>`:``}
+  <div class="ln"></div>
+  <p class="ft">Winner picks the movie.<br>Loser makes the popcorn.${S.booze?"<br>Water on the table. Nobody drives.":""}</p>
+</div>
+${feeBar()}
 <button class="btn go" data-act="rematch">Run it back</button>
 <button class="btn no" data-go="menu">Back to menu</button>`;
 };
@@ -1424,11 +2039,15 @@ V.quick=()=>`
 <p class="note" style="margin-top:0">One of you holds the phone and gives clues. The other guesses. Each card pauses the clock until you hit Start.</p>
 <label>Seconds on the clock</label>
 <div class="chips" data-set="secs">${[30,45,60,75,90].map(n=>`<button data-v="${n}" aria-pressed="${S.secs===n}">${n}s</button>`).join("")}</div>
+<label>Era</label>
+<div class="chips" data-set="era">${Object.keys(ERAS).map(k=>`<button data-v="${k}" aria-pressed="${S.era===k}">${ERAS[k].n}</button>`).join("")}</div>
 <label>Shelf</label>
 <div class="chips" data-set="qgenre">
   <button data-v="" aria-pressed="${!S.qgenre}">Everything</button>
   ${availableGenres().map(g=>`<button data-v="${g}" aria-pressed="${S.qgenre===g}">${GENRES[g]}</button>`).join("")}
 </div>
+<p class="note" style="margin-top:8px"><b>${pool(S.qgenre||null).length}</b> films in this pile.</p>
+<button class="tick" data-tog="retro" aria-pressed="${!!S.retro}"><b></b>Rewind Mode — trailer voice, video-store clerk, back of the box, away message</button>
 <button class="tick" data-tog="mystery" aria-pressed="${!!S.mystery}"><b></b>Mystery cards</button>
 <button class="tick" data-tog="dares" aria-pressed="${!!S.dares}"><b></b>Wildcard challenges</button>
 <button class="tick" data-tog="freeswap" aria-pressed="${!!S.freeswap}"><b></b>Two free swaps per round</button>
@@ -1461,14 +2080,24 @@ function focusKey(el){
   if(el.id)return "#"+el.id;
   return null;
 }
+let glitchT=null;
 function render(){
   const moved=S.screen!==S._last;S._last=S.screen;
   const active=document.activeElement;
   const key=moved?null:focusKey(active);
   const caret=(active&&active.tagName==="INPUT")?active.selectionStart:null;
   document.body.dataset.screen=S.screen;
-  $("#app").innerHTML=(V[S.screen]||V.menu)();
-  if(moved){window.scrollTo(0,0);return}
+  const app=$("#app");
+  app.innerHTML=(V[S.screen]||V.menu)();
+  if(moved){
+    window.scrollTo(0,0);
+    trackingSfx();
+    if(!calmMotion()){
+      app.classList.remove("glitch");void app.offsetWidth;app.classList.add("glitch");
+      clearTimeout(glitchT);glitchT=setTimeout(()=>app.classList.remove("glitch"),300);
+    }
+    return;
+  }
   if(!key)return;
   let back=null;try{back=$("#app "+key)}catch(e){}
   if(!back)return;
@@ -1509,16 +2138,31 @@ function readNames(){
 // Keeps whatever is typed (including a half-finished name) across a re-render.
 function keepNames(){for(let i=0;i<4;i++){const el=$("#n"+i);if(el)S.names[i]=el.value}syncP()}
 
-function startNight(){S.night={on:1,g:1,wins:[0,0],shots:[0,0],won:[],correct:[0,0]};S.game=GAMES[0].id;go("gameintro")}
+function startNight(){
+  S.night={on:1,g:1,wins:[0,0],won:[],correct:[0,0],lineup:["tapes","emoji",S.third]};
+  S.fees=[0,0];S.game=S.night.lineup[0];go("gameintro");
+}
+const gameAt=n=>gameById(S.night.on?S.night.lineup[n-1]:S.game);
 function beginGame(){
   if(S.game==="tapes"){resetTapes();startRound();return}
-  let set=S.game==="emoji"?EMOJI:TRIVIA;
-  if(S.family){const f=set.filter(x=>FAM[x.a]);if(f.length>=12)set=f}
+  if(S.game==="years"){startBuzz(yearPairs());return}
+  let set=(S.game==="emoji"?EMOJI:TRIVIA).filter(x=>cardInPlay(x.a));
+  if(set.length<12)set=(S.game==="emoji"?EMOJI:TRIVIA).filter(x=>!S.family||FAM[x.a]);
   startBuzz(set);
+}
+// Pairs far enough apart in time that "which came first" is knowledge, not luck.
+function yearPairs(){
+  const films=shuffle(MOVIES.filter(m=>inPlay(m)&&m.y));
+  const out=[];
+  for(let i=0;i<films.length;i++)for(let j=i+1;j<films.length&&out.length<400;j++){
+    if(Math.abs(films[i].y-films[j].y)>=YEAR_GAP){out.push({pair:[films[i],films[j]],a:films[i].y<films[j].y?0:1});break}
+  }
+  return shuffle(out);
 }
 function finishGame(w){
   S.gw=w;releaseAwake();
-  if(S.night.on){S.night.wins[w]++;S.night.won.push(w);if(S.booze)S.night.shots[1-w]++}
+  if(S.night.on){S.night.wins[w]++;S.night.won.push(w)}
+  if(S.booze)S.fees[1-w]++;                       // the loss costs a fee, as it always did
   fanfare();vib([200,80,200]);
   flash(S.p[w],"takes the game",()=>go("gameover"),1400,1);
 }
@@ -1635,13 +2279,25 @@ function resumeBuzzClock(){
 function buzzPress(i){
   const z=S.bz;if(!z||z.st!=="live")return;
   clearInterval(z.timer);buzzIn(i);vib([80]);
-  z.st="buzzed";z.who=i;z.msg="";render();
+  // Emoji and Plot Twist are judged by the other player; Which Came First? has
+  // a right answer, so the buzzer picks and the app rules.
+  z.st=S.game==="years"?"pick":"buzzed";
+  z.who=i;z.msg="";render();
 }
 function rule(right){
   const z=S.bz;
   if(right){z.sc[z.who]++;if(S.night.on)S.night.correct[z.who]++;ding();vib([60])}else wrong();
   if(raceDone()){z.st="reveal";z.msg=right?`Point to ${S.p[z.who]}.`:"No point.";render();return}
   buzzNext();
+}
+// Which Came First? — the buzzer picks one of the two films.
+function pickYear(choice){
+  const z=S.bz;if(!z||z.st!=="pick")return;
+  const it=z.items[z.i],right=choice===it.a;
+  if(right){z.sc[z.who]++;if(S.night.on)S.night.correct[z.who]++;ding();vib([60])}else{wrong();vib([200])}
+  z.st="reveal";
+  z.msg=right?`${S.p[z.who]} got it.`:`No — ${S.p[z.who]} had it the wrong way round.`;
+  render();
 }
 function buzzNext(){
   const z=S.bz;
@@ -1699,11 +2355,14 @@ document.addEventListener("click",e=>{
   }
   if(b.dataset.buzz!==undefined)return;            // handled on pointerdown
   if(b.dataset.rule!==undefined){rule(+b.dataset.rule);return}
+  if(b.dataset.pick!==undefined){pickYear(+b.dataset.pick);return}
+  if(b.dataset.fee!==undefined){S.fees[+b.dataset.fee]++;ejectSfx();vib([40]);render();return}
+  if(b.dataset.unfee!==undefined){const i=+b.dataset.unfee;if(S.fees[i])S.fees[i]--;tone(420,70,"triangle",.05);render();return}
 
   switch(b.dataset.act){
-    case "night":S.night={on:1,g:0,wins:[0,0],shots:[0,0],won:[],correct:[0,0]};go("setup");break;
-    case "start":readNames();if(S.night.on)startNight();else beginGame();break;
-    case "begin":beginGame();break;
+    case "night":S.night={on:1,g:0,wins:[0,0],won:[],correct:[0,0],lineup:["tapes","emoji",S.third]};go("setup");break;
+    case "start":readNames();if(S.night.on)startNight();else{S.fees=[0,0];beginGame()}break;
+    case "begin":dialupSfx();beginGame();break;
     case "faceoff":startShotClock();break;
     case "handoff":S.foTurn=1-S.foTurn;S.foLeft=S.shot;S.foEnd=Date.now()+S.shot*1000;tone(700,60);render();break;
     case "stuck":faceoffLose(S.foTurn);break;
@@ -1716,10 +2375,10 @@ document.addEventListener("click",e=>{
     case "ghint":S.bz.hint=1;tone(520,70);render();break;
     case "nextgame":
       if(S.night.g>=3||Math.max(...S.night.wins)>=2){anthem();confetti();go("champion")}
-      else{S.night.g++;S.game=GAMES[S.night.g-1].id;go("gameintro")}
+      else{S.night.g++;S.game=S.night.lineup[S.night.g-1];go("gameintro")}
       break;
-    case "again":beginGame();break;
-    case "rematch":stopTimers();startNight();break;
+    case "again":rewindSfx();beginGame();break;
+    case "rematch":stopTimers();rewindSfx();startNight();break;
     case "quit":
       if(S.quitArm){toMenu()}
       else{
@@ -1743,6 +2402,10 @@ document.addEventListener("keydown",e=>{
     // the buttons listen for pointerdown, which a synthetic click never fires.
     if(S.bz.st==="live"){
       if(e.key==="1"||e.key==="2"){e.preventDefault();buzzPress(e.key==="1"?0:1);return}
+    }
+    // Which Came First? — the same two keys now choose between the two films.
+    if(S.bz.st==="pick"){
+      if(e.key==="1"||e.key==="2"){e.preventDefault();pickYear(e.key==="1"?0:1);return}
     }
     if(S.bz.st==="reveal"&&(e.key===" "||e.key==="Enter"))hit('[data-act="bznext"]');
     return;
