@@ -32,3 +32,11 @@ Everything ships in the one file: 341 films with hints and emoji cards, 116 plot
 descriptions, face-off prompts and wildcards. Sound effects are synthesised with the Web
 Audio API, so no audio files are bundled. Settings and player names are remembered in
 `localStorage`.
+
+### A note on the clue text
+
+Clues point at a film by describing it. Song and poem titles are named, because a title is
+the most useful part of a music hint, but lyrics are never quoted — the hint describes how
+the music goes instead. Dialogue appears only as short, famous catchphrases; longer lines
+are paraphrased into a description of the same moment. The aim is a clue that is just as
+recognisable without reproducing anyone's work.
