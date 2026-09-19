@@ -14,7 +14,9 @@ A night is three games, best of three, picked from:
 3. **Plot Twist** — same buzzers, but the movie is described in plain words.
 4. **Which Came First?** — two films side by side; buzz in and pick the older one. The app
    knows the answer, so nobody argues.
-5. **Quote Unquote** — a real line from the film on screen. Buzz in and name it.
+5. **Quote Unquote** — up to three real lines from the same film on screen. Buzz in and name
+   it. If nobody does, the card gives up its genre, then its decade, then the title with the
+   letters knocked out, so a hard quote gets easier rather than just running out.
 
 There is also a "Just charades" mode for a single timed round.
 
@@ -30,6 +32,9 @@ There is also a "Just charades" mode for a single timed round.
   another at any point between rounds. The night ends on a rental receipt that totals them up.
 - VHS tracking glitch between screens, tape-deck sound effects and a dial-up handshake when
   a game starts.
+- Video-store livery: navy and gold with a ticket-red alert, a heavy wide display face, and
+  a torn ticket stub notched into the marquee. Nothing is fetched over the network — the
+  whole thing still works on a phone with no signal.
 
 Everything ships in the one file: 341 films with hints and emoji cards, 116 plot
 descriptions, face-off prompts and wildcards. Sound effects are synthesised with the Web
