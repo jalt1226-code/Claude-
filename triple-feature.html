@@ -2363,10 +2363,10 @@ function resumeShotClock(){
   clearInterval(S.foTimer);keepAwake();
   S.foTimer=setInterval(()=>{
     const n=Math.max(0,Math.ceil((S.foEnd-Date.now())/1000));
+    if(n<=0){clearInterval(S.foTimer);faceoffLose(S.foTurn);return}   // before the throttle
     if(n===S.foLeft)return;
     S.foLeft=n;
-    if(n<=5&&n>0)tick();
-    if(n<=0){clearInterval(S.foTimer);faceoffLose(S.foTurn);return}
+    if(n<=5)tick();
     paintClock(n,S.shot);
   },120);
 }
@@ -2385,18 +2385,25 @@ function startClock(total,after){
   S.swaps=S.freeswap?2:0;
   nextMovie();lockTaps();go("play");
 }
+// Ending the round, from wherever the clock happens to run out.
+function timeUp(){
+  clearInterval(S.timer);releaseAwake();buzzer();vib([400,100,400,100,600]);
+  flash("TIME",`${S.score} correct`,S.after,1600);
+}
 function runClock(){
-  clearInterval(S.timer);S.prep=0;tone(700,60);keepAwake();
+  clearInterval(S.timer);S.prep=0;
+  if(S.left<=0){timeUp();return}          // nothing left to run
+  tone(700,60);keepAwake();
   if(!S.away)S.endAt=Date.now()+S.left*1000;
   S.timer=setInterval(()=>{
     const n=Math.max(0,Math.ceil((S.endAt-Date.now())/1000));
-    if(n===S.left)return;
+    // This has to come before the repaint throttle below. With it after, a
+    // clock that starts already on zero matches the throttle on every tick and
+    // the round never ends — the timer just sits there.
+    if(n<=0){timeUp();return}
+    if(n===S.left)return;                 // same second, nothing to repaint
     S.left=n;
-    if(n<=5&&n>0)tick();
-    if(n<=0){
-      clearInterval(S.timer);releaseAwake();buzzer();vib([400,100,400,100,600]);
-      flash("TIME",`${S.score} correct`,S.after,1600);return;
-    }
+    if(n<=5)tick();
     paintClock(n,S.total);
   },120);
   render();
@@ -2413,13 +2420,19 @@ function gotIt(){
     if(S.night.on)S.night.correct[S.giver]+=worth;
   }
   if(S.streak===3)fanfare();else ding();
-  pauseClock();nextMovie();lockTaps();render();
+  pauseClock();
+  // The tap can land in the gap between the clock expiring and the next tick.
+  // The card still counts, but there is no time left to deal another one.
+  if(S.left<=0){timeUp();return}
+  nextMovie();lockTaps();render();
 }
 function passIt(){
   S.undo=snapshot();
   S.missed.push(S.cur.t);S.streak=0;
   if(S.mode==="full")S.stats.passes[S.giver]++;
-  tone(300,120,"triangle",.05);pauseClock();nextMovie();lockTaps();render();
+  tone(300,120,"triangle",.05);pauseClock();
+  if(S.left<=0){timeUp();return}
+  nextMovie();lockTaps();render();
 }
 function endRound(){
   const win=S.score>=S.need,gainer=win?S.giver:1-S.giver;
@@ -2447,10 +2460,11 @@ function resumeBuzzClock(){
   const z=S.bz;clearInterval(z.timer);keepAwake();
   z.timer=setInterval(()=>{
     const n=Math.max(0,Math.ceil((z.end-Date.now())/1000));
+    // before the throttle, for the same reason as the clue clock
+    if(n<=0){clearInterval(z.timer);buzzer();vib([300]);z.st="reveal";z.msg="Nobody buzzed in time.";render();return}
     if(n===z.left)return;
     z.left=n;
-    if(n<=3&&n>0)tick();
-    if(n<=0){clearInterval(z.timer);buzzer();vib([300]);z.st="reveal";z.msg="Nobody buzzed in time.";render();return}
+    if(n<=3)tick();
     // the ladder: each step hands over a little more, so a cold quote
     // becomes gettable rather than a coin flip
     if(S.game==="quotes"){
